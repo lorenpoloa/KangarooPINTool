@@ -1,9 +1,10 @@
 #include "pin.H"
 #include <iostream>
+#include <ctime>
+#include <stdint.h>  // Para tipos como uint64_t
 #include <fstream>
 #include <map>
 #include <string>
-#include <stdint.h>  // Para tipos como uint64_t
 
 #ifdef _MSC_VER
 #include <intrin.h>  // Para MSVC
@@ -45,11 +46,11 @@ std::map<std::string, BranchStats> branchStats;
 
 // Función para leer el ciclo de la CPU (TSC)
 inline UINT64 ReadTSC() {
-#ifdef _MSC_VER
-	return __rdtsc();  // Para MSVC
-#else
-	return __rdtsc();  // Para GCC y Clang
-#endif
+	struct timespec ts;
+	// clock_gettime devuelve el tiempo transcurrido desde un punto fijo
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	// Convertimos segundos a nanosegundos y los sumamos
+	return (UINT64)(ts.tv_sec * 1000000000LL + ts.tv_nsec);
 }
 
 // Inicia el seguimiento de un salto condicional
