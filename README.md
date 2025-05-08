@@ -17,7 +17,7 @@ This project is licensed under the CC0 License.
 ## How to use
 
 🛠️ Compilación y uso
-Guarda este código como branch_by_type_and_taken.cpp.
+Guarda este código como JumpsStats.cpp.
 
 Compile:
 bash
