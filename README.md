@@ -12,3 +12,18 @@ This is a tool developed using the [Intel PIN](https://www.intel.com/content/www
 
 This project is licensed under the CC0 License.
 **Note**: Intel PIN has its own proprietary license. Please refer to Intel's terms before using PIN.
+
+
+## How to use
+
+🛠️ Compilación y uso
+Guarda este código como branch_by_type_and_taken.cpp.
+
+Compile:
+bash
+make obj-intel64/JumpsStats.so TARGET=intel64 TOOL_ROOTS=JumpsStats
+
+
+Exec with PIN:
+bash
+pin -t JumpsStats.so -- ./your_program
