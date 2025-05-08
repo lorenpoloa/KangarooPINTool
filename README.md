@@ -22,9 +22,9 @@ Guarda este código como JumpsStats.cpp.
 Compile:
 bash
 
-'''c
+```c
 make obj-intel64/JumpsStats.so TARGET=intel64 TOOL_ROOTS=JumpsStats
-'''
+```
 
 Exec with PIN:
 bash
