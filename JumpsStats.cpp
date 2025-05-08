@@ -29,7 +29,7 @@ std::map<THREADID, BranchRecord> activeBranches;
 std::map<std::string, BranchStats> branchStats;
 
 // =================================================================================
-// RDTSC en Linux sin librerías
+// RDTSC en Linux sin librerÃ­as
 // =================================================================================
 
 inline UINT64 ReadTSC() {
@@ -42,7 +42,7 @@ inline UINT64 ReadTSC() {
 }
 
 // =================================================================================
-// Funciones de instrumentación
+// Funciones de instrumentaciÃ³n
 // =================================================================================
 
 VOID StartCondBranch(ADDRINT pc, BOOL taken, ADDRINT target, ADDRINT fallthrough,
@@ -58,7 +58,7 @@ VOID StartCondBranch(ADDRINT pc, BOOL taken, ADDRINT target, ADDRINT fallthrough
 
 VOID MaybeResolveBranch(ADDRINT currentPC, THREADID tid)
 {
-	auto it = activeBranches.find(tid);
+	std::map<THREADID, BranchRecord>::iterator it = activeBranches.find(tid);
 	if (it != activeBranches.end() && currentPC == it->second.resolveAddr) {
 		UINT64 endCycle = ReadTSC();
 		UINT64 duration = endCycle - it->second.startCycle;
@@ -109,9 +109,9 @@ VOID Fini(INT32 code, VOID *v)
 	out << "======= Informe por tipo de salto condicional =======\n";
 	out << "Tipo\tTomado\tCount\tCycles\tAvg\n";
 
-	for (auto &pair : branchStats) {
-		const std::string &type = pair.first;
-		const BranchStats &stats = pair.second;
+	for (std::map<std::string, BranchStats>::iterator it = branchStats.begin(); it != branchStats.end(); ++it) {
+		const std::string &type = it->first;
+		const BranchStats &stats = it->second;
 
 		out << type << "\tYES\t" << stats.count_taken << "\t"
 			<< stats.cycles_taken << "\t"
@@ -139,3 +139,4 @@ int main(int argc, char *argv[])
 	PIN_StartProgram();  // No retorna
 	return 0;
 }
+
