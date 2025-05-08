@@ -45,12 +45,13 @@ std::map<std::string, BranchStats> branchStats;
 // =================================================================================
 
 // Función para leer el ciclo de la CPU (TSC)
-inline UINT64 ReadTSC() {
-	struct timespec ts;
-	// clock_gettime devuelve el tiempo transcurrido desde un punto fijo
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	// Convertimos segundos a nanosegundos y los sumamos
-	return (UINT64)(ts.tv_sec * 1000000000LL + ts.tv_nsec);
+inline uint64_t ReadTSC() {
+	unsigned int lo, hi;
+	asm volatile (
+		"rdtsc"
+		: "=a"(lo), "=d"(hi)
+		);
+	return ((uint64_t)hi << 32) | lo;
 }
 
 // Inicia el seguimiento de un salto condicional
