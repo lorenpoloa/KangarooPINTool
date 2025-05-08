@@ -57,18 +57,18 @@ VOID StartCondBranch(ADDRINT pc, BOOL taken, ADDRINT target, ADDRINT fallthrough
 	rec.mnemonic = *mnemonic;
 	rec.taken = taken;
 
-	activeBranches[tid] = rec;
+	activeBranches[tid] = rec; // Corregido el uso de operador '='.
 }
 
 // Verifica si el salto ha sido resuelto
 VOID MaybeResolveBranch(ADDRINT currentPC, THREADID tid)
 {
-	auto it = activeBranches.find(tid);
+	std::map<THREADID, BranchRecord>::iterator it = activeBranches.find(tid);
 	if (it != activeBranches.end() && currentPC == it->second.resolveAddr) {
 		UINT64 endCycle = ReadTSC();
 		UINT64 duration = endCycle - it->second.startCycle;
 
-		// Actualiza las estadísticas según si fue tomado o no
+		// Accede correctamente a las estadísticas
 		BranchStats &stats = branchStats[it->second.mnemonic];
 		if (it->second.taken) {
 			stats.count_taken++;
@@ -137,9 +137,10 @@ VOID Fini(INT32 code, VOID *v)
 	out << "======= Informe por tipo de salto condicional =======\n";
 	out << "Tipo\tTomado\tCount\tCycles\tAvg\n";
 
-	for (const auto &entry : branchStats) {
-		const std::string &type = entry.first;
-		const BranchStats &stats = entry.second;
+	// Usamos tipos explícitos en lugar de 'auto'
+	for (std::map<std::string, BranchStats>::iterator it = branchStats.begin(); it != branchStats.end(); ++it) {
+		const std::string &type = it->first;
+		const BranchStats &stats = it->second;
 
 		// Tomados
 		out << type << "\tYES\t" << stats.count_taken << "\t"
@@ -173,3 +174,4 @@ int main(int argc, char *argv[])
 	PIN_StartProgram();  // No retorna
 	return 0;
 }
+
