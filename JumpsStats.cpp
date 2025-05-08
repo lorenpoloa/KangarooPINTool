@@ -4,10 +4,11 @@
 #include <map>
 #include <string>
 #include <stdint.h>  // Para tipos como uint64_t
+
 #ifdef _MSC_VER
-#include <intrin.h>  // Para __rdtsc en MSVC
+#include <intrin.h>  // Para MSVC
 #else
-#include <x86intrin.h>  // Para __rdtsc en GCC
+#include <x86intrin.h>  // Para GCC y Clang
 #endif
 
 // =================================================================================
@@ -44,7 +45,11 @@ std::map<std::string, BranchStats> branchStats;
 
 // Función para leer el ciclo de la CPU (TSC)
 inline UINT64 ReadTSC() {
-	return __rdtsc();
+#ifdef _MSC_VER
+	return __rdtsc();  // Para MSVC
+#else
+	return __rdtsc();  // Para GCC y Clang
+#endif
 }
 
 // Inicia el seguimiento de un salto condicional
@@ -91,8 +96,8 @@ VOID MaybeResolveBranch(ADDRINT currentPC, THREADID tid)
 // Esta función es llamada para cada instrucción
 VOID Instruction(INS ins, VOID *v)
 {
-	if (INS_IsBranch(ins) && INS_IsConditionalBranch(ins) && INS_HasFallThrough(ins)) {
-		// Obtenemos el mnemónico de la instrucción
+	if (INS_IsBranch(ins) && INS_HasFallThrough(ins)) {  // Verifica si es un salto condicional
+														 // Obtenemos el mnemónico de la instrucción
 		std::string *mnemonic = new std::string(INS_Disassemble(ins));
 
 		// Extraer solo el mnemónico (ej: "je", "jne", etc.)
@@ -112,13 +117,6 @@ VOID Instruction(INS ins, VOID *v)
 			IARG_END);
 
 		// Cada instrucción también verifica si estamos resolviendo un salto
-		INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)MaybeResolveBranch,
-			IARG_INST_PTR,
-			IARG_THREAD_ID,
-			IARG_END);
-	}
-	else {
-		// Verifica en todas las demás instrucciones si estamos resolviendo un salto activo
 		INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)MaybeResolveBranch,
 			IARG_INST_PTR,
 			IARG_THREAD_ID,
@@ -174,4 +172,3 @@ int main(int argc, char *argv[])
 	PIN_StartProgram();  // No retorna
 	return 0;
 }
-
