@@ -3,139 +3,88 @@
 #include <fstream>
 #include <map>
 #include <string>
-#include <stdint.h>
+#include <iomanip>
 
-// =================================================================================
-// Estructuras
-// =================================================================================
+// Contador de tipos de salto
+std::map<std::string, UINT64> branchTypeCounts;
+UINT64 totalBranches = 0;
 
-struct BranchStats {
-	UINT64 count_taken;
-	UINT64 cycles_taken;
-	UINT64 count_nottaken;
-	UINT64 cycles_nottaken;
+// Opciones de salida
+KNOB<std::string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "", "Archivo de salida");
 
-	BranchStats() : count_taken(0), cycles_taken(0), count_nottaken(0), cycles_nottaken(0) {}
-};
+std::ostream* out = &std::cerr;
+std::ofstream outFile;
 
-struct BranchRecord {
-	UINT64 startCycle;
-	ADDRINT resolveAddr;
-	std::string mnemonic;
-	BOOL taken;
-};
-
-std::map<THREADID, BranchRecord> activeBranches;
-std::map<std::string, BranchStats> branchStats;
-
-// =================================================================================
-// RDTSC en Linux sin librerías
-// =================================================================================
-
-inline UINT64 ReadTSC() {
-	unsigned int lo, hi;
-	asm volatile (
-		"rdtsc"
-		: "=a"(lo), "=d"(hi)
-		);
-	return ((UINT64)hi << 32) | lo;
+// Función que se llama en cada ejecución de un salto
+VOID CountBranch(std::string* mnemonic)
+{
+	branchTypeCounts[*mnemonic]++;
+	totalBranches++;
 }
 
-// =================================================================================
-// Funciones de instrumentación
-// =================================================================================
-
-VOID StartCondBranch(ADDRINT pc, BOOL taken, ADDRINT target, ADDRINT fallthrough,
-	THREADID tid, const std::string *mnemonic)
+// Instrumentar instrucciones de salto
+VOID Instruction(INS ins, VOID* v)
 {
-	BranchRecord rec;
-	rec.startCycle = ReadTSC();
-	rec.resolveAddr = taken ? target : fallthrough;
-	rec.mnemonic = *mnemonic;
-	rec.taken = taken;
-	activeBranches[tid] = rec;
-}
+	if (INS_IsBranch(ins)) {
+		std::string disasm = INS_Disassemble(ins);
+		size_t space = disasm.find(' ');
+		std::string mnemonic = (space != std::string::npos) ? disasm.substr(0, space) : disasm;
 
-VOID MaybeResolveBranch(ADDRINT currentPC, THREADID tid)
-{
-	auto it = activeBranches.find(tid);
-	if (it != activeBranches.end() && currentPC == it->second.resolveAddr) {
-		UINT64 endCycle = ReadTSC();
-		UINT64 duration = endCycle - it->second.startCycle;
+		std::string* copyMnemonic = new std::string(mnemonic);
 
-		BranchStats &stats = branchStats[it->second.mnemonic];
-		if (it->second.taken) {
-			stats.count_taken++;
-			stats.cycles_taken += duration;
-		}
-		else {
-			stats.count_nottaken++;
-			stats.cycles_nottaken += duration;
-		}
-
-		activeBranches.erase(it);
-	}
-}
-
-VOID Instruction(INS ins, VOID *v)
-{
-	if (INS_IsBranch(ins) && INS_HasFallThrough(ins)) {
-		std::string *mnemonic = new std::string(INS_Disassemble(ins));
-		size_t space = mnemonic->find(' ');
-		if (space != std::string::npos) {
-			*mnemonic = mnemonic->substr(0, space);
-		}
-
-		INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)StartCondBranch,
-			IARG_INST_PTR,
-			IARG_BRANCH_TAKEN,
-			IARG_BRANCH_TARGET_ADDR,
-			IARG_FALLTHROUGH_ADDR,
-			IARG_THREAD_ID,
-			IARG_PTR, mnemonic,
-			IARG_END);
-
-		INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)MaybeResolveBranch,
-			IARG_INST_PTR,
-			IARG_THREAD_ID,
+		INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)CountBranch,
+			IARG_PTR, copyMnemonic,
 			IARG_END);
 	}
 }
 
-VOID Fini(INT32 code, VOID *v)
+// Mostrar resultados al finalizar
+VOID Fini(INT32 code, VOID* v)
 {
-	std::ofstream out("branch_type_detail_report.txt");
+	*out << "======= Informe de saltos por tipo =======\n";
+	*out << "Tipo\t\tConteo\t\tPorcentaje\n";
 
-	out << "======= Informe por tipo de salto condicional =======\n";
-	out << "Tipo\tTomado\tCount\tCycles\tAvg\n";
-
-	for (auto &pair : branchStats) {
-		const std::string &type = pair.first;
-		const BranchStats &stats = pair.second;
-
-		out << type << "\tYES\t" << stats.count_taken << "\t"
-			<< stats.cycles_taken << "\t"
-			<< (stats.count_taken ? (stats.cycles_taken / stats.count_taken) : 0) << "\n";
-
-		out << type << "\tNO\t" << stats.count_nottaken << "\t"
-			<< stats.cycles_nottaken << "\t"
-			<< (stats.count_nottaken ? (stats.cycles_nottaken / stats.count_nottaken) : 0) << "\n";
+	std::map<std::string, UINT64>::iterator it;
+	for (it = branchTypeCounts.begin(); it != branchTypeCounts.end(); ++it) {
+		double porcentaje = (totalBranches > 0)
+			? (100.0 * it->second) / totalBranches
+			: 0.0;
+		*out << std::setw(6) << it->first
+			<< "\t\t" << std::setw(12) << it->second
+			<< "\t\t" << std::fixed << std::setprecision(2)
+			<< porcentaje << "%\n";
 	}
 
-	out << "=====================================================\n";
-	out.close();
+	*out << "==========================================\n";
+
+	if (outFile.is_open())
+		outFile.close();
 }
 
-int main(int argc, char *argv[])
+// Función principal
+int main(int argc, char* argv[])
 {
 	if (PIN_Init(argc, argv)) {
-		std::cerr << "Error al iniciar PIN.\n";
+		std::cerr << "Error al iniciar Pin.\n";
 		return 1;
+	}
+
+	// Abrir archivo de salida si se especificó
+	if (!KnobOutputFile.Value().empty()) {
+		outFile.open(KnobOutputFile.Value().c_str());
+		if (outFile.is_open()) {
+			out = &outFile;
+		}
+		else {
+			std::cerr << "No se pudo abrir el archivo de salida.\n";
+			return 1;
+		}
 	}
 
 	INS_AddInstrumentFunction(Instruction, 0);
 	PIN_AddFiniFunction(Fini, 0);
 
-	PIN_StartProgram();  // No retorna
+	PIN_StartProgram(); // No retorna
+
 	return 0;
 }
