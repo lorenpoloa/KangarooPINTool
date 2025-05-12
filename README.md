@@ -1,4 +1,4 @@
-# Lab4PINTools
+# KangarooPINTools
 Some PIN Tools for Computer Architecture Labs.
 
 This is a tool developed using the [Intel PIN](https://www.intel.com/content/www/us/en/developer/tools/pin.html) framework.
