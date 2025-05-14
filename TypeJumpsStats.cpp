@@ -5,13 +5,13 @@
 #include <string>
 #include <iomanip>
 
-// Estructura para llevar las estadÌsticas por tipo de salto
+// Estructura para llevar las estad√≠sticas por tipo de salto
 struct BranchStats {
 	UINT64 taken;
 	UINT64 notTaken;
 };
 
-// Mapa: tipo de salto -> estadÌsticas
+// Mapa: tipo de salto -> estad√≠sticas
 std::map<std::string, BranchStats> branchStats;
 
 UINT64 totalBranches = 0;
