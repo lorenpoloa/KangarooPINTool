@@ -1,16 +1,12 @@
 # KangarooPINTools
 Some PIN Tools for Computer Architecture Labs.
 
+
 This is a tool developed using the [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) framework.
 ## Requirements
 
 - Intel PIN (not included, download from the official website)
 - Compatible compiler (gcc/g++, clang, etc.)
-
-## License
-
-This project is licensed under the CC0 License.
-**Note**: Intel PIN has its own proprietary license. Please refer to Intel's terms before using PIN.
 
 
 ## What is Kangaroo PIN Tools
@@ -21,6 +17,7 @@ Simple stats about the number of conditional jumps instructions and the ratio of
 
 ### TypeJumpsStats
 More detailed stats about each type of jumps instructions and the ratio of them that are taken.
+
 
 ## How to use
 
@@ -39,3 +36,9 @@ Exec with PIN:
 pin -t JumpsStats.so -- ./your_program
 
 ```
+
+
+## License
+
+This project is licensed under the CC0 License.
+**Note**: Intel PIN has its own proprietary license. Please refer to Intel's terms before using PIN.
