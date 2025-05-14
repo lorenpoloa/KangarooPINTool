@@ -15,7 +15,7 @@ KNOB<std::string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "", "Archi
 std::ostream* out = &std::cerr;
 std::ofstream outFile;
 
-// Función que se llama en cada ejecución de un salto
+// FunciÃ³n que se llama en cada ejecuciÃ³n de un salto
 VOID CountBranch(std::string* mnemonic)
 {
 	branchTypeCounts[*mnemonic]++;
@@ -61,7 +61,7 @@ VOID Fini(INT32 code, VOID* v)
 		outFile.close();
 }
 
-// Función principal
+// FunciÃ³n principal
 int main(int argc, char* argv[])
 {
 	if (PIN_Init(argc, argv)) {
@@ -69,7 +69,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	// Abrir archivo de salida si se especificó
+	// Abrir archivo de salida si se especificÃ³
 	if (!KnobOutputFile.Value().empty()) {
 		outFile.open(KnobOutputFile.Value().c_str());
 		if (outFile.is_open()) {
