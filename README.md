@@ -22,7 +22,7 @@ More detailed stats about each type of jumps instructions and the ratio of them 
 ## How to use
 
 🛠️ Compiling and Using <br>
-Save this code as JumpsStats.cpp.
+
 
 Compile:
 ```bash
