@@ -21,19 +21,19 @@ More detailed stats about each type of jumps instructions and the ratio of them 
 
 ## How to use
 
-🛠️ Compilación y uso
-Guarda este código como JumpsStats.cpp.
+🛠️ Compiling and Using 
+Save this code as JumpsStats.cpp.
 
 Compile:
 ```bash
 
-make obj-intel64/JumpsStats.so TARGET=intel64 TOOL_ROOTS=JumpsStats
+make obj-intel64/JumpsStatsSimple.so TARGET=intel64 TOOL_ROOTS=JumpsStats
 ```
 
 Exec with PIN:
 ```bash
 
-pin -t JumpsStats.so -- ./your_program
+pin -t JumpsStatsSimple.so -- ./your_program
 
 ```
 
