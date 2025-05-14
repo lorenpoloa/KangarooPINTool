@@ -14,6 +14,15 @@ This project is licensed under the CC0 License.
 **Note**: Intel PIN has its own proprietary license. Please refer to Intel's terms before using PIN.
 
 
+## What is Kangaroo PIN Tools
+Is a set of PIN Tools to get stats about jumps indstructions in a program.
+
+### JumpsStatsSimple
+Simple stats about the number of conditional jumps instructions and the ratio of taken jumps.
+
+### TypeJumpsStats
+More detailed stats about each type of jumps instructions and the ratio of them that are taken.
+
 ## How to use
 
 🛠️ Compilación y uso
