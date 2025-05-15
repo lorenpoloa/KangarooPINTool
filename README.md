@@ -1,8 +1,8 @@
 ![Logo](https://github.com/lorenpoloa/KangarooPINTools/blob/main/Logo1_1_mini.png)
 
 
-# KangarooPINTools
-Some PIN Tools for Computer Architecture Labs.
+# KangarooPINTool
+Some PIN Tool for Computer Architecture Labs.
 
 
 This is a tool developed using the [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) framework.
