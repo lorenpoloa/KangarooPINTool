@@ -10,7 +10,7 @@ This is a tool developed using the [Intel PIN](https://www.intel.com/content/www
 
 
 ## What is Kangaroo PIN Tools
-Is a set of PIN Tools to get stats about jumps indstructions in a program.
+Is a set of PIN Tools to get stats about jumps instructions in a program.
 
 ### JumpsStatsSimple
 Simple stats about the number of conditional jumps instructions and the ratio of taken jumps.
