@@ -43,66 +43,64 @@ pin -t JumpsStatsSimple.so -- ./your_program
 ```
 
 
-## JumpsStatsByType 📘 Manual y Descripción
+## JumpsStatsByType 
+## 📘 Manual and Description
 
-📝 Descripción General
-JumpsStatsByType es una herramienta de instrumentación desarrollada con Intel® Pin Tool. Su objetivo es recolectar estadísticas detalladas de instrucciones de salto (branch instructions) ejecutadas por un programa, clasificadas por tipo de salto (por ejemplo: je, jne, jmp, call, etc.).
+### 📝 General Description
+JumpsStatsByType is an instrumentation tool developed with Intel® Pin Tool. Its goal is to collect detailed statistics of branch instructions executed by a program, classified by jump type (e.g., je, jne, jmp, call, etc.).
 
-La herramienta analiza si cada salto fue tomado o no tomado, y presenta un resumen tanto por tipo de instrucción como global.
+The tool analyzes whether each branch was taken or not taken and provides a summary both by instruction type and overall.
 
-### 🔍 ¿Qué mide?
-Por cada tipo de instrucción de salto (como je, jmp, jne, etc.), la herramienta reporta:
+### 🔍 What does it measure?
+For each type of branch instruction (such as je, jmp, jne, etc.), the tool reports:
 
-Número de veces que el salto fue tomado.
+Number of times the branch was taken.
 
-Número de veces que el salto no fue tomado.
+Number of times the branch was not taken.
 
-Total de veces que se ejecutó esa instrucción de salto.
+Total number of times that branch instruction was executed.
 
-Porcentaje de veces que el salto fue tomado.
+Percentage of times the branch was taken.
 
-Además, proporciona un resumen total de todos los saltos encontrados durante la ejecución del programa.
+Additionally, it provides a total summary of all branches encountered during program execution.
 
-### 🏗️ Compilación
-Asegúrate de tener el entorno de Intel® Pin configurado correctamente.
+### 🏗️ Compilation
+Make sure the Intel® Pin environment is properly set up.
 
-Guarda el código fuente como jumps_stats_by_type.cpp.
+Save the source code as jumps_stats_by_type.cpp.
 
-Compílalo con el sistema de compilación de Pin (Makefile o línea de comandos), por ejemplo:
+Compile it using the Pin build system (Makefile or command line), for example:
 
 ```bash
-
+Copiar
+Editar
 make obj-intel64/JumpsStatsByType.so TARGET=intel64
-
 ```
 
-### ▶️ Uso
-Para usar la herramienta, ejecuta tu programa objetivo con Pin y esta herramienta como sigue:
+### ▶️ Usage
+To use the tool, run your target program with Pin and this tool as follows:
 
 ```bash
 
-pin -t obj-intel64/JumpsStatsByType.so -o resultados.txt -- ./mi_programa
+pin -t obj-intel64/JumpsStatsByType.so -o results.txt -- ./my_program
+Parameters
 
+-t obj-intel64/JumpsStatsByType.so: path to the compiled tool file.
+
+-o results.txt: (optional) name of the output file. If omitted, the output will be shown in the console.
+
+-- ./my_program: the program you want to instrument and analyze.
 ```
 
-Parámetros
-```
--t obj-intel64/JumpsStatsByType.so: ruta al archivo compilado de la herramienta.
+### 📤 Example Output
 
--o resultados.txt: (opcional) nombre del archivo de salida. Si se omite, la salida se mostrará en la consola.
-
--- ./mi_programa: el programa que deseas instrumentar y analizar.
-```
-
-### 📤 Ejemplo de salida
 ```text
-
-======= Estadisticas de saltos =======
-Tipo
-	Tomados
-	No tomados
+======= Branch Statistics =======
+Type
+	Taken
+	Not-Taken
 	Total
-	Porcentaje Tomado
+	Percent Taken
 type: je
 	Taken: 152
 	Not-Taken: 389
@@ -116,19 +114,19 @@ type: jmp
 ...
 =======================================
 Total:
-  Tomados     = 1234
-  No tomados  = 456
-  Saltos totales = 1690
+  Taken        = 1234
+  Not Taken    = 456
+  Total Branches = 1690
 
 ```
 
-### ⚠️ Consideraciones
-La herramienta solo cuenta instrucciones de tipo salto (branches) y las clasifica por su mnemonic (por ejemplo, jne, jmp).
+### ⚠️ Considerations
 
-Funciona con programas binarios compatibles con Pin (normalmente en formato ELF o PE).
+The tool only counts branch-type instructions and classifies them by their mnemonic (e.g., jne, jmp).
 
-No diferencia entre saltos directos e indirectos, pero puedes extenderla para hacerlo.
+It works with binaries compatible with Pin (usually in ELF or PE format).
 
+It does not distinguish between direct and indirect branches, but you can extend it to do so.
 
 ## License
 
