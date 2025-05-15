@@ -63,7 +63,7 @@ Porcentaje de veces que el salto fue tomado.
 
 Además, proporciona un resumen total de todos los saltos encontrados durante la ejecución del programa.
 
-###🏗️ Compilación
+### 🏗️ Compilación
 Asegúrate de tener el entorno de Intel® Pin configurado correctamente.
 
 Guarda el código fuente como jumps_stats_by_type.cpp.
