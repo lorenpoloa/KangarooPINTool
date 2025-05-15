@@ -5,15 +5,17 @@
 #include <string>
 #include <iomanip>
 
-// Estructura para llevar las estadísticas por tipo de salto
+// Estructura para contar los saltos tomados y no tomados por tipo de instruccion
 struct BranchStats {
 	UINT64 taken;
 	UINT64 notTaken;
 };
 
-// Mapa: tipo de salto -> estadísticas
+// Mapa: relación entre tipo de salto y estadisticas 
 std::map<std::string, BranchStats> branchStats;
 
+
+//variables para contar los valores totales de saltos tomados, no tomados y totales
 UINT64 totalBranches = 0;
 UINT64 totalTaken = 0;
 UINT64 totalNotTaken = 0;
