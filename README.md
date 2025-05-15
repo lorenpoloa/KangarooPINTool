@@ -72,9 +72,9 @@ Save the source code as jumps_stats_by_type.cpp.
 Compile it using the Pin build system (Makefile or command line), for example:
 
 ```bash
-Copiar
-Editar
+
 make obj-intel64/JumpsStatsByType.so TARGET=intel64
+
 ```
 
 ### ▶️ Usage
