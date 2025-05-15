@@ -96,27 +96,21 @@ Parameters
 
 ```text
 ======= Branch Statistics =======
-Type
-	Taken
-	Not-Taken
-	Total
-	Percent Taken
-type: je
-	Taken: 152
-	Not-Taken: 389
-	Total: 541
-	Percent-Taken: 28.08%
-type: jmp
-	Taken: 742
-	Not-Taken: 0
-	Total: 742
-	Percent-Taken: 100.00%
-...
+Type      Taken     Not-Taken      Total     Percent Taken
+JL        16618     11137          27755     59.87
+JLE       777522    86634          864156    89.97
+JMP       6697168   0              6697168   100.00
+JNB       1         0              1         100.00
+JNBE      0         1              1         0.00
+JNL       1495623   96834          1592457   93.92
+JNLE      2997847   2700035        5697882   52.61
+JNZ       29622463  599877         30222340  98.02
+JP        0         2              2         0.00
+JZ        138542    6895682        7034224   1.97
 =======================================
-Total:
-  Taken        = 1234
-  Not Taken    = 456
-  Total Branches = 1690
+Total Taken     = 40964646
+Total Not Taken = 10252691
+Total Branches  = 51217337
 
 ```
 
