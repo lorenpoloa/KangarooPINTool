@@ -15,9 +15,11 @@ Is a set of PIN Tools to get stats about jumps indstructions in a program.
 ### JumpsStatsSimple
 Simple stats about the number of conditional jumps instructions and the ratio of taken jumps.
 
-### TypeJumpsStats
+### JumpsStatsByType
 More detailed stats about each type of jumps instructions and the ratio of them that are taken.
 
+### JumpsStatsWithPredictor
+Stats about differents jumps predictors simulations
 
 ## How to use
 
