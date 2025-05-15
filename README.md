@@ -1,4 +1,4 @@
-![Logo](https://github.com/lorenpoloa/KangarooPINTools/blob/main/Logo1_1_mini(1).png)
+![Logo](https://github.com/lorenpoloa/KangarooPINTools/blob/main/Logo1_1_mini%20(1).png)
 
 
 # KangarooPINTool
