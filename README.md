@@ -1,3 +1,6 @@
+![Logo](https://github.com/lorenpoloa/KangarooPINTools/blob/main/Logo1_1.png)
+
+
 # KangarooPINTools
 Some PIN Tools for Computer Architecture Labs.
 
