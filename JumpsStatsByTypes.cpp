@@ -1,3 +1,12 @@
+//
+// @ORIGINAL_AUTHOR: Lorenzo Polo Arévalo
+//
+
+/*! @file
+* This file contain a PIN Tool to get stats about jumps by type.
+*/
+
+
 #include "pin.H"
 #include <iostream>
 #include <fstream>
@@ -5,101 +14,133 @@
 #include <string>
 #include <iomanip>
 
-// Estructura para contar los saltos tomados y no tomados por tipo de instruccion
-struct BranchStats {
+// Estructura de estadísticas por tipo de salto
+struct JumpStats {
 	UINT64 taken;
 	UINT64 notTaken;
+
+	JumpStats() : taken(0), notTaken(0) {}
 };
 
-// Mapa: relación entre tipo de salto y estadisticas 
-std::map<std::string, BranchStats> branchStats;
-
-
-//variables para contar los valores totales de saltos tomados, no tomados y totales
-UINT64 totalBranches = 0;
+// Mapa de estadísticas por mnemonic
+std::map<std::string, JumpStats> stats;
 UINT64 totalTaken = 0;
 UINT64 totalNotTaken = 0;
 
-KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "", "Archivo de salida");
+//Se declara un archivo de salida para los resultados.
+std::ofstream outFile;
 
-std::ostream* out = &cerr;
-//std::ofstream outFile;
+// opcion -o para declarar nombre del archivo de salida
+KNOB<std::string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool",
+	"o", "", "Output file name");
 
-VOID CountBranchTaken(std::string* mnemonic, BOOL taken)
+
+// Función llamada antes de cada instrucción de salto. Cada mnemonico se guarda en una fila del mapa y
+// para cada uno se cuenta si el salto es tomado o no.
+VOID CountBranch(std::string* mnemonic, BOOL taken)
 {
-	BranchStats& stats = branchStats[*mnemonic];
 	if (taken) {
-		stats.taken++;
+		stats[*mnemonic].taken++;
 		totalTaken++;
 	}
 	else {
-		stats.notTaken++;
+		stats[*mnemonic].notTaken++;
 		totalNotTaken++;
 	}
-	totalBranches++;
 }
 
-VOID Instruction(INS ins, VOID* v)
+// Instrumentar las instrucciones de salto dentro de una rutina
+VOID InstrumentRoutine(RTN rtn)
 {
-	if (INS_IsBranch(ins)) {
-		string disasm = INS_Disassemble(ins);
-		size_t space = disasm.find(' ');
-		string mnemonic = (space != std::string::npos) ? disasm.substr(0, space) : disasm;
+	RTN_Open(rtn);
 
-		string* copyMnemonic = new std::string(mnemonic);
+	for (INS ins = RTN_InsHead(rtn); INS_Valid(ins); ins = INS_Next(ins)) {
 
-		INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)CountBranchTaken,
-			IARG_PTR, copyMnemonic,
-			IARG_BRANCH_TAKEN,
-			IARG_END);
+		// si la instrucción es de salto (Branch) 
+		if (INS_IsBranch(ins)) {
+
+			std::string* mnemonic = new std::string(INS_Mnemonic(ins)); // Se se copia en mnemonico del salto (nombre del tipo de salto)
+
+			INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)CountBranch,
+				IARG_PTR, mnemonic,
+				IARG_BRANCH_TAKEN,
+				IARG_END);
+		}
+	}
+
+	RTN_Close(rtn);
+}
+
+// Se llama cuando se carga una imagen, si la imagen pertenece al programa principal se ejecuta la instrumentación, en caso contrario no.
+VOID ImageLoad(IMG img, VOID* v)
+{
+	if (!IMG_IsMainExecutable(img)) return;
+
+
+	for (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec)) {
+		for (RTN rtn = SEC_RtnHead(sec); RTN_Valid(rtn); rtn = RTN_Next(rtn)) {
+			InstrumentRoutine(rtn);
+		}
 	}
 }
 
+// Impresión de las estadísticas
 VOID Fini(INT32 code, VOID* v)
 {
-	*out << "======= Estadisticas de saltos =======\n";
-	*out << "Tipo\n\tTomados\n\tNo tomados\n\tTotal\n\tPorcentaje Tomado\n";
+	std::ostream& out = outFile.is_open() ? outFile : std::cerr; // si no se ha abierto el archivo de resultados estos se pasan por standard error
 
-	std::map<std::string, BranchStats>::iterator it;
-	for (it = branchStats.begin(); it != branchStats.end(); ++it) {
-		const string& mnemonic = it->first;
-		const BranchStats& stats = it->second;
-		UINT64 subtotal = stats.taken + stats.notTaken;
-		double pctTaken = (subtotal > 0) ? (100.0 * stats.taken / subtotal) : 0.0;
+																 //Se imprimen las cabeceras de los resultados (nombres de columna)
+	out << "======= Branch Statistics =======\n";
+	out << std::left << std::setw(10) << "Type"
+		<< std::setw(10) << "Taken"
+		<< std::setw(15) << "Not-Taken"
+		<< std::setw(10) << "Total"
+		<< "Percent Taken" << endl;
 
-		*out << "type: " << std::fixed << mnemonic
-			<< "\n\tTaken: " << std::fixed << stats.taken
-			<< "\n\tNot-Taken: " << std::fixed << stats.notTaken
-			<< "\n\tTotal: " << std::fixed << subtotal
-			<< "\n\tPercent-Taken: " << std::fixed << std::setprecision(2)
-			<< pctTaken << endl;
+	// Se itera cada entrada del mapa para imprimir las estadisticas de cada tipo de salto
+	std::map<std::string, JumpStats>::iterator it;
+
+	for (it = stats.begin(); it != stats.end(); ++it) {
+		const std::string& mnemonic = it->first;
+		const JumpStats& s = it->second;
+		UINT64 total = s.taken + s.notTaken; // se calcula el total de saltos del actual tipo
+		double percent = (total > 0) ? (100.0 * s.taken / total) : 0.0; // se calcula el porcentaje de saltos tomados
+
+																		//se imprimen los resultados
+		out << std::left << std::setw(10) << mnemonic
+			<< std::setw(10) << s.taken
+			<< std::setw(15) << s.notTaken
+			<< std::setw(10) << total
+			<< std::fixed << std::setprecision(2) << percent << endl;
 	}
 
-	*out << "=======================================\n";
-	*out << "Total:\n"
-		<< "  Tomados     = " << totalTaken << endl
-		<< "  No tomados  = " << totalNotTaken << endl
-		<< "  Saltos totales = " << totalBranches << endl;
-
+	// Se imprimen los resultados finales
+	out << "=======================================\n";
+	out << "Total Taken     = " << totalTaken << endl;
+	out << "Total Not Taken = " << totalNotTaken << endl;
+	out << "Total Branches  = " << (totalTaken + totalNotTaken) << endl;
 }
 
+// Funcion llamada cuando falla la pin tool.
+INT32 Usage()
+{
+	std::cerr << "Usage: pin -t JumpsStatsByType.so [-o output.txt] -- <program>\n"; // Mensaje help si hay fallo en la ejecución 
+	return -1;
+}
+
+// Inicio de programa.
 int main(int argc, char* argv[])
 {
-	if (PIN_Init(argc, argv)) {
-		std::cerr << "Uso incorrecto del Pin Tool.\n";
-		return 1;
+	if (PIN_Init(argc, argv)) return Usage(); // Si falla la ejecucion de la pin tool
+
+	if (!KnobOutputFile.Value().empty()) { // Si se ha introducido un nombre de archivo
+		outFile.open(KnobOutputFile.Value().c_str()); // se crea el archivo con el nombre introducido
 	}
 
-	if (!KnobOutputFile.Value().empty()) {
-		out = new std::ofstream(KnobOutputFile.Value().c_str());
-	}
-
-	INS_AddInstrumentFunction(Instruction, 0);
-	PIN_AddFiniFunction(Fini, 0);
-
-	
+	IMG_AddInstrumentFunction(ImageLoad, 0);// Cuando se inicia una nueva imagen se llama a la función image load (comprueva si pertenece al programa principal)
+	PIN_AddFiniFunction(Fini, 0);// Al finalizar la ejecución se llama a la función Fini
 
 	PIN_StartProgram(); // No retorna
+
 	return 0;
 }
-
