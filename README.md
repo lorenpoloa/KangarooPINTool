@@ -5,7 +5,7 @@
 Some PIN Tool for Computer Architecture Labs.
 
 
-This is a tool developed using the [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) framework.
+This is a tool developed using the [Intel® Pin](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) framework.
 ## Requirements
 
 - Intel PIN (not included, download from the official website)
