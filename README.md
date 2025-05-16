@@ -190,7 +190,7 @@ Always Not Taken
 
 ### 🧾 File Structure
 
-```css
+```bash
 
 .
 ├── JumpsStatsWithPredictor.cpp   ← Main PIN tool
