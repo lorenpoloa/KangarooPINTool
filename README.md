@@ -148,7 +148,7 @@ Always Not Taken: Always predicts the branch will not be taken.
 
 2–3 → predict taken
 
-The counter is incremented/decremented based on the actual result.
+The counter is incremented/decremented based on the current result.
 
 
 ### 📤 Usage
