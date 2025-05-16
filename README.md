@@ -30,7 +30,7 @@ Stats about differents jumps predictors simulations
 
 Copy all files from this repository to [your pin path]/source/tools/JumpsTools
 
-
+Copy makefile from any tools directori (ex. /tools/MyPinTool/makefile) to /tools/JumpsTools/makefile
 
 Compile:
 ```bash
