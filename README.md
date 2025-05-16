@@ -152,20 +152,14 @@ The counter is incremented/decremented based on the actual result.
 
 
 ### 📤 Usage
-Compilation
-To compile the tool:
-
-bash
-Copiar
-Editar
-make obj-intel64/JumpsStatsWithPredictor.so
-Ensure that the .cpp and .h files are in the same directory, and use PIN’s build system.
 
 Execution
-bash
-Copiar
-Editar
+```bash
+
 pin -t obj-intel64/JumpsStatsWithPredictor.so -o results.txt -- ./your_program
+
+```
+
 -t: specifies the tool
 
 -o: output file for the results
@@ -173,9 +167,8 @@ pin -t obj-intel64/JumpsStatsWithPredictor.so -o results.txt -- ./your_program
 --: separates PIN arguments from the program to run
 
 ### 📄 Sample Output
-text
-Copiar
-Editar
+```text
+
 ===== Branch Predictor Results =====
 Always Taken
     Correct: 140
@@ -193,16 +186,17 @@ Always Not Taken
     Correct: 250
     Total: 300
     Accuracy: 83.33%
-
+```
 
 ### 🧾 File Structure
-css
-Copiar
-Editar
+
+```css
+
 .
 ├── JumpsStatsWithPredictor.cpp   ← Main PIN tool
 ├── Jump_Predictor_Sim.cpp        ← Predictor implementations
 └── Jump_Predictor_Sim.h          ← Predictor data structures and API
+```
 
 ### ⚠️ Considerations
 
