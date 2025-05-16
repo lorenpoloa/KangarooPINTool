@@ -13,8 +13,8 @@ enum PredictorType {
 };
 
 struct PredictorStats {
-    UINT64 correct = 0;
-    UINT64 total = 0;
+    static UINT64 correct = 0;
+    static UINT64 total = 0;
 };
 
 class BranchPredictor {
