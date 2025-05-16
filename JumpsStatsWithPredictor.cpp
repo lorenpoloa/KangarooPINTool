@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <map>
 #include "Jump_Predictor_Sim.h"
+#include <map>
 
 using std::string;
 using std::map;
