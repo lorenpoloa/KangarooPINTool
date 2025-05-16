@@ -28,11 +28,14 @@ Stats about differents jumps predictors simulations
 
 🛠️ Compiling and Using <br>
 
+Copy all files from this repository to [your pin path]/source/tools/JumpsTools
+
+
 
 Compile:
 ```bash
 
-make obj-intel64/JumpsStatsSimple.so TARGET=intel64 TOOL_ROOTS=JumpsStats
+make
 ```
 
 Exec with PIN:
@@ -64,18 +67,6 @@ Percentage of times the branch was taken.
 
 Additionally, it provides a total summary of all branches encountered during program execution.
 
-### 🏗️ Compilation
-Make sure the Intel® Pin environment is properly set up.
-
-Save the source code as jumps_stats_by_type.cpp.
-
-Compile it using the Pin build system (Makefile or command line), for example:
-
-```bash
-
-make obj-intel64/JumpsStatsByType.so TARGET=intel64
-
-```
 
 ### ▶️ Usage
 To use the tool, run your target program with Pin and this tool as follows:
