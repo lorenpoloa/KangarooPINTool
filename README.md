@@ -109,9 +109,108 @@ Total Branches  = 51217337
 
 The tool only counts branch-type instructions and classifies them by their mnemonic (e.g., jne, jmp).
 
-It works with binaries compatible with Pin (usually in ELF or PE format).
+It does not distinguish between direct and indirect branches, but you can extend it to do so.
+
+
+
+## JumpsStatsWithPredictor 
+## 📘 Manual and Description
+
+
+### 📝 General Description
+JumpsStatsWithPredictor is a PIN Tool that instruments conditional branch instructions in a running binary. Its goal is to evaluate the accuracy of several commonly used branch prediction algorithms:
+
+Always Taken
+
+Always Not Taken
+
+1-bit Predictor
+
+2-bit Predictor
+
+The tool collects runtime statistics during the program execution and generates a summary report at the end.
+
+### 🧠 Components and Operation
+
+Branch Prediction Logic
+File: Jump_Predictor_Sim.cpp
+
+Implemented Predictors:
+Always Taken: Always predicts that the branch will be taken.
+
+Always Not Taken: Always predicts the branch will not be taken.
+
+1-bit Predictor: Stores the last branch result (true/false) for each instruction address and uses it for the next prediction.
+
+2-bit Predictor: Uses a 2-bit saturating counter (values 0-3) per address:
+
+0–1 → predict not taken
+
+2–3 → predict taken
+
+The counter is incremented/decremented based on the actual result.
+
+
+### 📤 Usage
+Compilation
+To compile the tool:
+
+bash
+Copiar
+Editar
+make obj-intel64/JumpsStatsWithPredictor.so
+Ensure that the .cpp and .h files are in the same directory, and use PIN’s build system.
+
+Execution
+bash
+Copiar
+Editar
+pin -t obj-intel64/JumpsStatsWithPredictor.so -o results.txt -- ./your_program
+-t: specifies the tool
+
+-o: output file for the results
+
+--: separates PIN arguments from the program to run
+
+### 📄 Sample Output
+text
+Copiar
+Editar
+===== Branch Predictor Results =====
+Always Taken
+    Correct: 140
+    Total: 300
+    Accuracy: 46.67%
+Always Not Taken
+    Correct: 160
+    Total: 300
+    Accuracy: 53.33%
+1-bit
+    Correct: 200
+    Total: 300
+    Accuracy: 66.67%
+2-bit
+    Correct: 250
+    Total: 300
+    Accuracy: 83.33%
+
+
+### 🧾 File Structure
+css
+Copiar
+Editar
+.
+├── JumpsStatsWithPredictor.cpp   ← Main PIN tool
+├── Jump_Predictor_Sim.cpp        ← Predictor implementations
+└── Jump_Predictor_Sim.h          ← Predictor data structures and API
+
+### ⚠️ Considerations
+
+The tool only counts predictions statistics from the simulated jump predictor, not about real jump predictor from the CPU that execute the program.
 
 It does not distinguish between direct and indirect branches, but you can extend it to do so.
+
+
 
 ## License
 
