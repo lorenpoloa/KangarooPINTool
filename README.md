@@ -26,7 +26,7 @@ Stats about differents jumps predictors simulations
 
 ## How to use
 
-###Compiling and Using <br>
+### Compiling and Using <br>
 
 Copy all files from this repository to [your pin path]/source/tools/JumpsTools
 
@@ -38,7 +38,7 @@ Compile:
 make
 ```
 
-###Exec with PIN:
+### Exec with PIN:
 ```bash
 
 pin -t JumpsStatsSimple.so -- ./your_program
