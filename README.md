@@ -83,7 +83,7 @@ Parameters
 -- ./my_program: the program you want to instrument and analyze.
 ```
 
-### 📤 Example Output
+### 📄 Example Output
 
 ```text
 ======= Branch Statistics =======
@@ -130,7 +130,7 @@ Always Not Taken
 
 The tool collects runtime statistics during the program execution and generates a summary report at the end.
 
-### 🧠 Components and Operation
+### ⚙️ Components and Operation
 
 Branch Prediction Logic
 File: Jump_Predictor_Sim.cpp
@@ -151,7 +151,7 @@ Always Not Taken: Always predicts the branch will not be taken.
 The counter is incremented/decremented based on the current result.
 
 
-### 📤 Usage
+### ▶️ Usage
 
 Execution
 ```bash
