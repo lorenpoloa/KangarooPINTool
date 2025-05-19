@@ -26,16 +26,19 @@ Stats about differents jumps predictors simulations
 
 ## How to use
 
-🛠️ Compiling and Using <br>
+### Compiling and Using <br>
 
+Copy all files from this repository to [your pin path]/source/tools/JumpsTools
+
+Copy makefile from any tools directori (ex. /tools/MyPinTool/makefile) to /tools/JumpsTools/makefile
 
 Compile:
 ```bash
 
-make obj-intel64/JumpsStatsSimple.so TARGET=intel64 TOOL_ROOTS=JumpsStats
+make
 ```
 
-Exec with PIN:
+### Exec with PIN:
 ```bash
 
 pin -t JumpsStatsSimple.so -- ./your_program
@@ -64,18 +67,6 @@ Percentage of times the branch was taken.
 
 Additionally, it provides a total summary of all branches encountered during program execution.
 
-### 🏗️ Compilation
-Make sure the Intel® Pin environment is properly set up.
-
-Save the source code as jumps_stats_by_type.cpp.
-
-Compile it using the Pin build system (Makefile or command line), for example:
-
-```bash
-
-make obj-intel64/JumpsStatsByType.so TARGET=intel64
-
-```
 
 ### ▶️ Usage
 To use the tool, run your target program with Pin and this tool as follows:
@@ -92,7 +83,7 @@ Parameters
 -- ./my_program: the program you want to instrument and analyze.
 ```
 
-### 📤 Example Output
+### 📄 Example Output
 
 ```text
 ======= Branch Statistics =======
@@ -118,9 +109,102 @@ Total Branches  = 51217337
 
 The tool only counts branch-type instructions and classifies them by their mnemonic (e.g., jne, jmp).
 
-It works with binaries compatible with Pin (usually in ELF or PE format).
+It does not distinguish between direct and indirect branches, but you can extend it to do so.
+
+
+
+## JumpsStatsWithPredictor 
+## 📘 Manual and Description
+
+
+### 📝 General Description
+JumpsStatsWithPredictor is a PIN Tool that instruments conditional branch instructions in a running binary. Its goal is to evaluate the accuracy of several commonly used branch prediction algorithms:
+
+Always Taken
+
+Always Not Taken
+
+1-bit Predictor
+
+2-bit Predictor
+
+The tool collects runtime statistics during the program execution and generates a summary report at the end.
+
+### ⚙️ Components and Operation
+
+Branch Prediction Logic
+File: Jump_Predictor_Sim.cpp
+
+Implemented Predictors:
+Always Taken: Always predicts that the branch will be taken.
+
+Always Not Taken: Always predicts the branch will not be taken.
+
+1-bit Predictor: Stores the last branch result (true/false) for each instruction address and uses it for the next prediction.
+
+2-bit Predictor: Uses a 2-bit saturating counter (values 0-3) per address:
+
+0–1 → predict not taken
+
+2–3 → predict taken
+
+The counter is incremented/decremented based on the current result.
+
+
+### ▶️ Usage
+
+Execution
+```bash
+
+pin -t obj-intel64/JumpsStatsWithPredictor.so -o results.txt -- ./your_program
+
+```
+
+-t: specifies the tool
+
+-o: output file for the results
+
+--: separates PIN arguments from the program to run
+
+### 📄 Sample Output
+```text
+
+===== Branch Predictor Results =====
+Always Taken
+    Correct: 140
+    Total: 300
+    Accuracy: 46.67%
+Always Not Taken
+    Correct: 160
+    Total: 300
+    Accuracy: 53.33%
+1-bit
+    Correct: 200
+    Total: 300
+    Accuracy: 66.67%
+2-bit
+    Correct: 250
+    Total: 300
+    Accuracy: 83.33%
+```
+
+### 🧾 File Structure
+
+```bash
+
+.
+├── JumpsStatsWithPredictor.cpp   ← Main PIN tool
+├── Jump_Predictor_Sim.cpp        ← Predictor implementations
+└── Jump_Predictor_Sim.h          ← Predictor data structures and API
+```
+
+### ⚠️ Considerations
+
+The tool only counts predictions statistics from the simulated jump predictor, not about real jump predictor from the CPU that execute the program.
 
 It does not distinguish between direct and indirect branches, but you can extend it to do so.
+
+
 
 ## License
 
