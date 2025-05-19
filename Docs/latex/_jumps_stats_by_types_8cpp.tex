@@ -10,37 +10,31 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_jump_stats}{Jump\+Stats}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Estructura de estadísticas por tipo de salto. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{_jumps_stats_by_types_8cpp_ae6af238f29dbbc9db89f6a9c44d3a7f2}\label{_jumps_stats_by_types_8cpp_ae6af238f29dbbc9db89f6a9c44d3a7f2} 
 KNOB$<$ std\+::string $>$ {\bfseries Knob\+Output\+File} (KNOB\+\_\+\+MODE\+\_\+\+WRITEONCE, "{}pintool"{}, "{}o"{}, "{}"{}, "{}Output file name"{})
 \item 
-\Hypertarget{_jumps_stats_by_types_8cpp_a7ea25dce6fa59402876060d6353efa54}\label{_jumps_stats_by_types_8cpp_a7ea25dce6fa59402876060d6353efa54} 
-VOID {\bfseries Count\+Branch} (std\+::string \texorpdfstring{$\ast$}{*}mnemonic, BOOL taken)
+VOID \mbox{\hyperlink{_jumps_stats_by_types_8cpp_a7ea25dce6fa59402876060d6353efa54}{Count\+Branch}} (std\+::string \texorpdfstring{$\ast$}{*}mnemonic, BOOL taken)
+\begin{DoxyCompactList}\small\item\em Función llamada antes de cada instrucción de salto. Cada mnemonico se guarda en una fila del mapa y para cada uno se cuenta si el salto es tomado o no. \end{DoxyCompactList}\item 
+VOID \mbox{\hyperlink{_jumps_stats_by_types_8cpp_a7787d035ac223dd189b2326784dbfc09}{Instrument\+Routine}} (RTN rtn)
 \item 
-\Hypertarget{_jumps_stats_by_types_8cpp_a7787d035ac223dd189b2326784dbfc09}\label{_jumps_stats_by_types_8cpp_a7787d035ac223dd189b2326784dbfc09} 
-VOID {\bfseries Instrument\+Routine} (RTN rtn)
-\item 
-\Hypertarget{_jumps_stats_by_types_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8}\label{_jumps_stats_by_types_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8} 
-VOID {\bfseries Image\+Load} (IMG img, VOID \texorpdfstring{$\ast$}{*}v)
-\item 
-\Hypertarget{_jumps_stats_by_types_8cpp_aa61669c70de306a0ba47bf5878b9f806}\label{_jumps_stats_by_types_8cpp_aa61669c70de306a0ba47bf5878b9f806} 
-VOID {\bfseries Fini} (INT32 code, VOID \texorpdfstring{$\ast$}{*}v)
-\item 
-\Hypertarget{_jumps_stats_by_types_8cpp_a9c89b15666dec97b4af91ba247b6a230}\label{_jumps_stats_by_types_8cpp_a9c89b15666dec97b4af91ba247b6a230} 
-INT32 {\bfseries Usage} ()
-\item 
-\Hypertarget{_jumps_stats_by_types_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{_jumps_stats_by_types_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
-int {\bfseries main} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
-\end{DoxyCompactItemize}
+VOID \mbox{\hyperlink{_jumps_stats_by_types_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8}{Image\+Load}} (IMG img, VOID \texorpdfstring{$\ast$}{*}v)
+\begin{DoxyCompactList}\small\item\em Se llama cuando se carga una imagen, si la imagen pertenece al programa principal se ejecuta la instrumentación, en caso contrario no. \end{DoxyCompactList}\item 
+VOID \mbox{\hyperlink{_jumps_stats_by_types_8cpp_aa61669c70de306a0ba47bf5878b9f806}{Fini}} (INT32 code, VOID \texorpdfstring{$\ast$}{*}v)
+\begin{DoxyCompactList}\small\item\em Impresión de las estadísticas. \end{DoxyCompactList}\item 
+INT32 \mbox{\hyperlink{_jumps_stats_by_types_8cpp_a9c89b15666dec97b4af91ba247b6a230}{Usage}} ()
+\begin{DoxyCompactList}\small\item\em Funcion llamada cuando falla la pin tool. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_jumps_stats_by_types_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Inicio de programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{_jumps_stats_by_types_8cpp_a7159cf525e0dca20b83c4628bcb4db4a}\label{_jumps_stats_by_types_8cpp_a7159cf525e0dca20b83c4628bcb4db4a} 
 std\+::map$<$ std\+::string, \mbox{\hyperlink{struct_jump_stats}{Jump\+Stats}} $>$ {\bfseries stats}
-\item 
+\begin{DoxyCompactList}\small\item\em Mapa de estadísticas por mnemonic. \end{DoxyCompactList}\item 
 \Hypertarget{_jumps_stats_by_types_8cpp_a5e471569e1026514bebef42782b79806}\label{_jumps_stats_by_types_8cpp_a5e471569e1026514bebef42782b79806} 
 UINT64 {\bfseries total\+Taken} = 0
 \item 
@@ -54,3 +48,112 @@ std\+::ofstream {\bfseries out\+File}
 
 \doxysubsection{Detailed Description}
 This file contain a PIN Tool to get stats about jumps by type. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_jumps_stats_by_types_8cpp_a7ea25dce6fa59402876060d6353efa54}\index{JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}!CountBranch@{CountBranch}}
+\index{CountBranch@{CountBranch}!JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}}
+\doxysubsubsection{\texorpdfstring{CountBranch()}{CountBranch()}}
+{\footnotesize\ttfamily \label{_jumps_stats_by_types_8cpp_a7ea25dce6fa59402876060d6353efa54} 
+VOID Count\+Branch (\begin{DoxyParamCaption}\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{mnemonic}{, }\item[{BOOL}]{taken}{}\end{DoxyParamCaption})}
+
+
+
+Función llamada antes de cada instrucción de salto. Cada mnemonico se guarda en una fila del mapa y para cada uno se cuenta si el salto es tomado o no. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mnemonic} & mnemonico del tipo de salto (jne, jmp, jz, etc. ) \\
+\hline
+{\em taken} & bool para indicar si el salto fue tomado o no \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+VOID 
+\end{DoxyReturn}
+\Hypertarget{_jumps_stats_by_types_8cpp_aa61669c70de306a0ba47bf5878b9f806}\index{JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}!Fini@{Fini}}
+\index{Fini@{Fini}!JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}}
+\doxysubsubsection{\texorpdfstring{Fini()}{Fini()}}
+{\footnotesize\ttfamily \label{_jumps_stats_by_types_8cpp_aa61669c70de306a0ba47bf5878b9f806} 
+VOID Fini (\begin{DoxyParamCaption}\item[{INT32}]{code}{, }\item[{VOID \texorpdfstring{$\ast$}{*}}]{v}{}\end{DoxyParamCaption})}
+
+
+
+Impresión de las estadísticas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & \\
+\hline
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\texorpdfstring{$\ast$}{*} VOID 
+\end{DoxyReturn}
+\Hypertarget{_jumps_stats_by_types_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8}\index{JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}!ImageLoad@{ImageLoad}}
+\index{ImageLoad@{ImageLoad}!JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}}
+\doxysubsubsection{\texorpdfstring{ImageLoad()}{ImageLoad()}}
+{\footnotesize\ttfamily \label{_jumps_stats_by_types_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8} 
+VOID Image\+Load (\begin{DoxyParamCaption}\item[{IMG}]{img}{, }\item[{VOID \texorpdfstring{$\ast$}{*}}]{v}{}\end{DoxyParamCaption})}
+
+
+
+Se llama cuando se carga una imagen, si la imagen pertenece al programa principal se ejecuta la instrumentación, en caso contrario no. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & \\
+\hline
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+VOID 
+\end{DoxyReturn}
+\Hypertarget{_jumps_stats_by_types_8cpp_a7787d035ac223dd189b2326784dbfc09}\index{JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}!InstrumentRoutine@{InstrumentRoutine}}
+\index{InstrumentRoutine@{InstrumentRoutine}!JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}}
+\doxysubsubsection{\texorpdfstring{InstrumentRoutine()}{InstrumentRoutine()}}
+{\footnotesize\ttfamily \label{_jumps_stats_by_types_8cpp_a7787d035ac223dd189b2326784dbfc09} 
+VOID Instrument\+Routine (\begin{DoxyParamCaption}\item[{RTN}]{rtn}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em rtn} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+VOID 
+\end{DoxyReturn}
+\Hypertarget{_jumps_stats_by_types_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}!main@{main}}
+\index{main@{main}!JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{_jumps_stats_by_types_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Inicio de programa. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \\
+\hline
+{\em argv} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{_jumps_stats_by_types_8cpp_a9c89b15666dec97b4af91ba247b6a230}\index{JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}!Usage@{Usage}}
+\index{Usage@{Usage}!JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}}
+\doxysubsubsection{\texorpdfstring{Usage()}{Usage()}}
+{\footnotesize\ttfamily \label{_jumps_stats_by_types_8cpp_a9c89b15666dec97b4af91ba247b6a230} 
+INT32 Usage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Funcion llamada cuando falla la pin tool. 
+
+\begin{DoxyReturn}{Returns}
+INT32 
+\end{DoxyReturn}

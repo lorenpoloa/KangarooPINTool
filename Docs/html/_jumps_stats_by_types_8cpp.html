@@ -119,6 +119,7 @@ $(function(){initNavTree('_jumps_stats_by_types_8cpp.html',''); initResizable(tr
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_jump_stats.html">JumpStats</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura de estadísticas por tipo de salto.  <a href="struct_jump_stats.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -126,29 +127,29 @@ Functions</h2></td></tr>
 <tr class="memitem:ae6af238f29dbbc9db89f6a9c44d3a7f2" id="r_ae6af238f29dbbc9db89f6a9c44d3a7f2"><td class="memItemLeft" align="right" valign="top"><a id="ae6af238f29dbbc9db89f6a9c44d3a7f2" name="ae6af238f29dbbc9db89f6a9c44d3a7f2"></a>
 KNOB&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>KnobOutputFile</b> (KNOB_MODE_WRITEONCE, &quot;pintool&quot;, &quot;o&quot;, &quot;&quot;, &quot;Output file name&quot;)</td></tr>
 <tr class="separator:ae6af238f29dbbc9db89f6a9c44d3a7f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ea25dce6fa59402876060d6353efa54" id="r_a7ea25dce6fa59402876060d6353efa54"><td class="memItemLeft" align="right" valign="top"><a id="a7ea25dce6fa59402876060d6353efa54" name="a7ea25dce6fa59402876060d6353efa54"></a>
-VOID&#160;</td><td class="memItemRight" valign="bottom"><b>CountBranch</b> (std::string *mnemonic, BOOL taken)</td></tr>
+<tr class="memitem:a7ea25dce6fa59402876060d6353efa54" id="r_a7ea25dce6fa59402876060d6353efa54"><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ea25dce6fa59402876060d6353efa54">CountBranch</a> (std::string *mnemonic, BOOL taken)</td></tr>
+<tr class="memdesc:a7ea25dce6fa59402876060d6353efa54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función llamada antes de cada instrucción de salto. Cada mnemonico se guarda en una fila del mapa y para cada uno se cuenta si el salto es tomado o no.  <br /></td></tr>
 <tr class="separator:a7ea25dce6fa59402876060d6353efa54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7787d035ac223dd189b2326784dbfc09" id="r_a7787d035ac223dd189b2326784dbfc09"><td class="memItemLeft" align="right" valign="top"><a id="a7787d035ac223dd189b2326784dbfc09" name="a7787d035ac223dd189b2326784dbfc09"></a>
-VOID&#160;</td><td class="memItemRight" valign="bottom"><b>InstrumentRoutine</b> (RTN rtn)</td></tr>
+<tr class="memitem:a7787d035ac223dd189b2326784dbfc09" id="r_a7787d035ac223dd189b2326784dbfc09"><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7787d035ac223dd189b2326784dbfc09">InstrumentRoutine</a> (RTN rtn)</td></tr>
 <tr class="separator:a7787d035ac223dd189b2326784dbfc09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a781d53cb9e89bf1aba9c52d094c4ead8" id="r_a781d53cb9e89bf1aba9c52d094c4ead8"><td class="memItemLeft" align="right" valign="top"><a id="a781d53cb9e89bf1aba9c52d094c4ead8" name="a781d53cb9e89bf1aba9c52d094c4ead8"></a>
-VOID&#160;</td><td class="memItemRight" valign="bottom"><b>ImageLoad</b> (IMG img, VOID *v)</td></tr>
+<tr class="memitem:a781d53cb9e89bf1aba9c52d094c4ead8" id="r_a781d53cb9e89bf1aba9c52d094c4ead8"><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a781d53cb9e89bf1aba9c52d094c4ead8">ImageLoad</a> (IMG img, VOID *v)</td></tr>
+<tr class="memdesc:a781d53cb9e89bf1aba9c52d094c4ead8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Se llama cuando se carga una imagen, si la imagen pertenece al programa principal se ejecuta la instrumentación, en caso contrario no.  <br /></td></tr>
 <tr class="separator:a781d53cb9e89bf1aba9c52d094c4ead8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa61669c70de306a0ba47bf5878b9f806" id="r_aa61669c70de306a0ba47bf5878b9f806"><td class="memItemLeft" align="right" valign="top"><a id="aa61669c70de306a0ba47bf5878b9f806" name="aa61669c70de306a0ba47bf5878b9f806"></a>
-VOID&#160;</td><td class="memItemRight" valign="bottom"><b>Fini</b> (INT32 code, VOID *v)</td></tr>
+<tr class="memitem:aa61669c70de306a0ba47bf5878b9f806" id="r_aa61669c70de306a0ba47bf5878b9f806"><td class="memItemLeft" align="right" valign="top">VOID&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa61669c70de306a0ba47bf5878b9f806">Fini</a> (INT32 code, VOID *v)</td></tr>
+<tr class="memdesc:aa61669c70de306a0ba47bf5878b9f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Impresión de las estadísticas.  <br /></td></tr>
 <tr class="separator:aa61669c70de306a0ba47bf5878b9f806"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c89b15666dec97b4af91ba247b6a230" id="r_a9c89b15666dec97b4af91ba247b6a230"><td class="memItemLeft" align="right" valign="top"><a id="a9c89b15666dec97b4af91ba247b6a230" name="a9c89b15666dec97b4af91ba247b6a230"></a>
-INT32&#160;</td><td class="memItemRight" valign="bottom"><b>Usage</b> ()</td></tr>
+<tr class="memitem:a9c89b15666dec97b4af91ba247b6a230" id="r_a9c89b15666dec97b4af91ba247b6a230"><td class="memItemLeft" align="right" valign="top">INT32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c89b15666dec97b4af91ba247b6a230">Usage</a> ()</td></tr>
+<tr class="memdesc:a9c89b15666dec97b4af91ba247b6a230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion llamada cuando falla la pin tool.  <br /></td></tr>
 <tr class="separator:a9c89b15666dec97b4af91ba247b6a230"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top"><a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> (int argc, char *argv[])</td></tr>
+<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
+<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicio de programa.  <br /></td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a7159cf525e0dca20b83c4628bcb4db4a" id="r_a7159cf525e0dca20b83c4628bcb4db4a"><td class="memItemLeft" align="right" valign="top"><a id="a7159cf525e0dca20b83c4628bcb4db4a" name="a7159cf525e0dca20b83c4628bcb4db4a"></a>
 std::map&lt; std::string, <a class="el" href="struct_jump_stats.html">JumpStats</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>stats</b></td></tr>
+<tr class="memdesc:a7159cf525e0dca20b83c4628bcb4db4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapa de estadísticas por mnemonic. <br /></td></tr>
 <tr class="separator:a7159cf525e0dca20b83c4628bcb4db4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e471569e1026514bebef42782b79806" id="r_a5e471569e1026514bebef42782b79806"><td class="memItemLeft" align="right" valign="top"><a id="a5e471569e1026514bebef42782b79806" name="a5e471569e1026514bebef42782b79806"></a>
 UINT64&#160;</td><td class="memItemRight" valign="bottom"><b>totalTaken</b> = 0</td></tr>
@@ -162,7 +163,176 @@ std::ofstream&#160;</td><td class="memItemRight" valign="bottom"><b>outFile</b><
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contain a PIN Tool to get stats about jumps by type. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a7ea25dce6fa59402876060d6353efa54" name="a7ea25dce6fa59402876060d6353efa54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ea25dce6fa59402876060d6353efa54">&#9670;&#160;</a></span>CountBranch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VOID CountBranch </td>
+          <td>(</td>
+          <td class="paramtype">std::string *</td>          <td class="paramname"><span class="paramname"><em>mnemonic</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">BOOL</td>          <td class="paramname"><span class="paramname"><em>taken</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función llamada antes de cada instrucción de salto. Cada mnemonico se guarda en una fila del mapa y para cada uno se cuenta si el salto es tomado o no. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mnemonic</td><td>mnemonico del tipo de salto (jne, jmp, jz, etc. ) </td></tr>
+    <tr><td class="paramname">taken</td><td>bool para indicar si el salto fue tomado o no </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>VOID </dd></dl>
+
+</div>
+</div>
+<a id="aa61669c70de306a0ba47bf5878b9f806" name="aa61669c70de306a0ba47bf5878b9f806"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa61669c70de306a0ba47bf5878b9f806">&#9670;&#160;</a></span>Fini()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VOID Fini </td>
+          <td>(</td>
+          <td class="paramtype">INT32</td>          <td class="paramname"><span class="paramname"><em>code</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VOID *</td>          <td class="paramname"><span class="paramname"><em>v</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Impresión de las estadísticas. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td></td></tr>
+    <tr><td class="paramname">v</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>* VOID </dd></dl>
+
+</div>
+</div>
+<a id="a781d53cb9e89bf1aba9c52d094c4ead8" name="a781d53cb9e89bf1aba9c52d094c4ead8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781d53cb9e89bf1aba9c52d094c4ead8">&#9670;&#160;</a></span>ImageLoad()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VOID ImageLoad </td>
+          <td>(</td>
+          <td class="paramtype">IMG</td>          <td class="paramname"><span class="paramname"><em>img</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VOID *</td>          <td class="paramname"><span class="paramname"><em>v</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Se llama cuando se carga una imagen, si la imagen pertenece al programa principal se ejecuta la instrumentación, en caso contrario no. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">img</td><td></td></tr>
+    <tr><td class="paramname">v</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>VOID </dd></dl>
+
+</div>
+</div>
+<a id="a7787d035ac223dd189b2326784dbfc09" name="a7787d035ac223dd189b2326784dbfc09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7787d035ac223dd189b2326784dbfc09">&#9670;&#160;</a></span>InstrumentRoutine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">VOID InstrumentRoutine </td>
+          <td>(</td>
+          <td class="paramtype">RTN</td>          <td class="paramname"><span class="paramname"><em>rtn</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rtn</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>VOID </dd></dl>
+
+</div>
+</div>
+<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicio de programa. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td></td></tr>
+    <tr><td class="paramname">argv</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a9c89b15666dec97b4af91ba247b6a230" name="a9c89b15666dec97b4af91ba247b6a230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c89b15666dec97b4af91ba247b6a230">&#9670;&#160;</a></span>Usage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">INT32 Usage </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion llamada cuando falla la pin tool. </p>
+<dl class="section return"><dt>Returns</dt><dd>INT32 </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
