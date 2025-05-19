@@ -1,0 +1,56 @@
+\doxysection{Jumps\+Stats\+By\+Types.\+cpp File Reference}
+\hypertarget{_jumps_stats_by_types_8cpp}{}\label{_jumps_stats_by_types_8cpp}\index{JumpsStatsByTypes.cpp@{JumpsStatsByTypes.cpp}}
+{\ttfamily \#include "{}pin.\+H"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_jump_stats}{Jump\+Stats}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_ae6af238f29dbbc9db89f6a9c44d3a7f2}\label{_jumps_stats_by_types_8cpp_ae6af238f29dbbc9db89f6a9c44d3a7f2} 
+KNOB$<$ std\+::string $>$ {\bfseries Knob\+Output\+File} (KNOB\+\_\+\+MODE\+\_\+\+WRITEONCE, "{}pintool"{}, "{}o"{}, "{}"{}, "{}Output file name"{})
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a7ea25dce6fa59402876060d6353efa54}\label{_jumps_stats_by_types_8cpp_a7ea25dce6fa59402876060d6353efa54} 
+VOID {\bfseries Count\+Branch} (std\+::string \texorpdfstring{$\ast$}{*}mnemonic, BOOL taken)
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a7787d035ac223dd189b2326784dbfc09}\label{_jumps_stats_by_types_8cpp_a7787d035ac223dd189b2326784dbfc09} 
+VOID {\bfseries Instrument\+Routine} (RTN rtn)
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8}\label{_jumps_stats_by_types_8cpp_a781d53cb9e89bf1aba9c52d094c4ead8} 
+VOID {\bfseries Image\+Load} (IMG img, VOID \texorpdfstring{$\ast$}{*}v)
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_aa61669c70de306a0ba47bf5878b9f806}\label{_jumps_stats_by_types_8cpp_aa61669c70de306a0ba47bf5878b9f806} 
+VOID {\bfseries Fini} (INT32 code, VOID \texorpdfstring{$\ast$}{*}v)
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a9c89b15666dec97b4af91ba247b6a230}\label{_jumps_stats_by_types_8cpp_a9c89b15666dec97b4af91ba247b6a230} 
+INT32 {\bfseries Usage} ()
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{_jumps_stats_by_types_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int {\bfseries main} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a7159cf525e0dca20b83c4628bcb4db4a}\label{_jumps_stats_by_types_8cpp_a7159cf525e0dca20b83c4628bcb4db4a} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{struct_jump_stats}{Jump\+Stats}} $>$ {\bfseries stats}
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a5e471569e1026514bebef42782b79806}\label{_jumps_stats_by_types_8cpp_a5e471569e1026514bebef42782b79806} 
+UINT64 {\bfseries total\+Taken} = 0
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a44e1e3d119c540909be70c59e34b3056}\label{_jumps_stats_by_types_8cpp_a44e1e3d119c540909be70c59e34b3056} 
+UINT64 {\bfseries total\+Not\+Taken} = 0
+\item 
+\Hypertarget{_jumps_stats_by_types_8cpp_a256e446169b81f9ef9104a1eedf5383b}\label{_jumps_stats_by_types_8cpp_a256e446169b81f9ef9104a1eedf5383b} 
+std\+::ofstream {\bfseries out\+File}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contain a PIN Tool to get stats about jumps by type. 

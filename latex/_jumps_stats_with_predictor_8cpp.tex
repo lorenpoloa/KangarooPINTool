@@ -1,0 +1,195 @@
+\doxysection{Jumps\+Stats\+With\+Predictor.\+cpp File Reference}
+\hypertarget{_jumps_stats_with_predictor_8cpp}{}\label{_jumps_stats_with_predictor_8cpp}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+
+
+PIN Tool para recopilar estadísticas de distintos simuladores de predictores de salto.  
+
+
+{\ttfamily \#include "{}pin.\+H"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include "{}Jump\+\_\+\+Predictor\+\_\+\+Sim.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+KNOB$<$ string $>$ \mbox{\hyperlink{_jumps_stats_with_predictor_8cpp_a03549da41eea5e976f7592e91f2aedc6}{Knob\+Output\+File}} (KNOB\+\_\+\+MODE\+\_\+\+WRITEONCE, "{}pintool"{}, "{}o"{}, "{}"{}, "{}Archivo de salida"{})
+\begin{DoxyCompactList}\small\item\em Opción de línea de comandos para especificar archivo de salida. \end{DoxyCompactList}\item 
+VOID \mbox{\hyperlink{_jumps_stats_with_predictor_8cpp_ac6dcc1851f71b3b94547c95a84ba75b4}{Count\+Branch}} (ADDRINT addr, BOOL taken)
+\begin{DoxyCompactList}\small\item\em Función de conteo de saltos condicionales. \end{DoxyCompactList}\item 
+VOID \mbox{\hyperlink{_jumps_stats_with_predictor_8cpp_af97356fb76e45e2a17b9ca8384b99bc5}{Instruction}} (INS ins, VOID \texorpdfstring{$\ast$}{*}v)
+\begin{DoxyCompactList}\small\item\em Función de instrumentación de instrucciones. \end{DoxyCompactList}\item 
+VOID \mbox{\hyperlink{_jumps_stats_with_predictor_8cpp_aa61669c70de306a0ba47bf5878b9f806}{Fini}} (INT32 code, VOID \texorpdfstring{$\ast$}{*}v)
+\begin{DoxyCompactList}\small\item\em Función que se ejecuta al finalizar la ejecución del programa instrumentado. \end{DoxyCompactList}\item 
+INT32 \mbox{\hyperlink{_jumps_stats_with_predictor_8cpp_a9c89b15666dec97b4af91ba247b6a230}{Usage}} ()
+\begin{DoxyCompactList}\small\item\em Función de ayuda en caso de error de uso. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_jumps_stats_with_predictor_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Función principal de la herramienta PIN. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_jumps_stats_with_predictor_8cpp_acd915f82a6ae21dbf24c5659b8499fcc}\label{_jumps_stats_with_predictor_8cpp_acd915f82a6ae21dbf24c5659b8499fcc} 
+\mbox{\hyperlink{class_branch_predictor}{Branch\+Predictor}} {\bfseries predictor}
+\begin{DoxyCompactList}\small\item\em Instancia global del simulador de predictores de salto. \end{DoxyCompactList}\item 
+ostream \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_jumps_stats_with_predictor_8cpp_a580fd50bba9bf91b42a76f8948a83b9a}{out}} = \&cerr
+\begin{DoxyCompactList}\small\item\em Flujo de salida para imprimir los resultados. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+PIN Tool para recopilar estadísticas de distintos simuladores de predictores de salto. 
+
+@\+ORIGINAL\+\_\+\+AUTHOR\+: Lorenzo Polo Arévalo
+
+Este archivo implementa una herramienta basada en Intel PIN que instrumenta saltos condicionales y simula varios tipos de predictores de salto (always taken, always not taken, 1-\/bit, 2-\/bit). Al finalizar la ejecución del programa instrumentado, se imprimen estadísticas de precisión para cada predictor. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_jumps_stats_with_predictor_8cpp_ac6dcc1851f71b3b94547c95a84ba75b4}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}!CountBranch@{CountBranch}}
+\index{CountBranch@{CountBranch}!JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+\doxysubsubsection{\texorpdfstring{CountBranch()}{CountBranch()}}
+{\footnotesize\ttfamily \label{_jumps_stats_with_predictor_8cpp_ac6dcc1851f71b3b94547c95a84ba75b4} 
+VOID Count\+Branch (\begin{DoxyParamCaption}\item[{ADDRINT}]{addr}{, }\item[{BOOL}]{taken}{}\end{DoxyParamCaption})}
+
+
+
+Función de conteo de saltos condicionales. 
+
+Esta función es invocada por PIN antes de la ejecución de cada salto condicional para informar si el salto fue tomado o no.
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & Dirección de la instrucción de salto. \\
+\hline
+{\em taken} & Booleano que indica si el salto fue tomado. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_jumps_stats_with_predictor_8cpp_aa61669c70de306a0ba47bf5878b9f806}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}!Fini@{Fini}}
+\index{Fini@{Fini}!JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+\doxysubsubsection{\texorpdfstring{Fini()}{Fini()}}
+{\footnotesize\ttfamily \label{_jumps_stats_with_predictor_8cpp_aa61669c70de306a0ba47bf5878b9f806} 
+VOID Fini (\begin{DoxyParamCaption}\item[{INT32}]{code}{, }\item[{VOID \texorpdfstring{$\ast$}{*}}]{v}{}\end{DoxyParamCaption})}
+
+
+
+Función que se ejecuta al finalizar la ejecución del programa instrumentado. 
+
+Imprime estadísticas de aciertos, totales y precisión para cada tipo de predictor simulado.
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Código de finalización del programa (no utilizado). \\
+\hline
+{\em v} & Argumento adicional (no utilizado). \\
+\hline
+\end{DoxyParams}
+se imprime la cabecera de los resultados
+
+se crea una estructura de tipo \doxylink{struct_predictor_stats}{Predictor\+Stats}. Se guardan los resultados de cada predictor llamando a la funcion get\+Stats de la instancia predictor
+
+Por cada simulador de predictor se guardan sus resultados
+
+numero aciertos
+
+total saltos
+
+porcentaje de aciertos
+
+se imprimen los resultados\Hypertarget{_jumps_stats_with_predictor_8cpp_af97356fb76e45e2a17b9ca8384b99bc5}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}!Instruction@{Instruction}}
+\index{Instruction@{Instruction}!JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+\doxysubsubsection{\texorpdfstring{Instruction()}{Instruction()}}
+{\footnotesize\ttfamily \label{_jumps_stats_with_predictor_8cpp_af97356fb76e45e2a17b9ca8384b99bc5} 
+VOID Instruction (\begin{DoxyParamCaption}\item[{INS}]{ins}{, }\item[{VOID \texorpdfstring{$\ast$}{*}}]{v}{}\end{DoxyParamCaption})}
+
+
+
+Función de instrumentación de instrucciones. 
+
+Recorre cada instrucción del programa, y si es un salto condicional con camino alternativo, inserta una llamada a {\ttfamily Count\+Branch} justo antes de ejecutarla.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ins} & Instrucción a instrumentar. \\
+\hline
+{\em v} & Argumento adicional (no utilizado en este caso). \\
+\hline
+\end{DoxyParams}
+comprueba si es una instrucción de salto y condicional (INS\+\_\+\+Has\+Fall\+Through) ~\newline
+
+
+Se inserta una llamada a la función Count\+Branch antes de ejecutar la instrucción ins.
+
+Dirección de la instrucción
+
+Indica si es tomado
+
+Fin de argumentos\Hypertarget{_jumps_stats_with_predictor_8cpp_a03549da41eea5e976f7592e91f2aedc6}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}!KnobOutputFile@{KnobOutputFile}}
+\index{KnobOutputFile@{KnobOutputFile}!JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+\doxysubsubsection{\texorpdfstring{KnobOutputFile()}{KnobOutputFile()}}
+{\footnotesize\ttfamily \label{_jumps_stats_with_predictor_8cpp_a03549da41eea5e976f7592e91f2aedc6} 
+KNOB$<$ string $>$ Knob\+Output\+File (\begin{DoxyParamCaption}\item[{KNOB\+\_\+\+MODE\+\_\+\+WRITEONCE}]{}{, }\item[{"{}pintool"{}}]{}{, }\item[{"{}o"{}}]{}{, }\item[{"{}"{}}]{}{, }\item[{"{}Archivo de salida"{}}]{}{}\end{DoxyParamCaption})}
+
+
+
+Opción de línea de comandos para especificar archivo de salida. 
+
+Si se utiliza {\ttfamily -\/o \texorpdfstring{$<$}{<}archivo\texorpdfstring{$>$}{>}}, los resultados se imprimen en ese archivo. \Hypertarget{_jumps_stats_with_predictor_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}!main@{main}}
+\index{main@{main}!JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{_jumps_stats_with_predictor_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Función principal de la herramienta PIN. 
+
+Inicializa el entorno de PIN, configura el archivo de salida si se especifica, registra las funciones de instrumentación y finalización, y lanza el programa instrumentado.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Número de argumentos de línea de comandos. \\
+\hline
+{\em argv} & Vector de argumentos. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si termina correctamente (aunque normalmente no retorna). 
+\end{DoxyReturn}
+Se ejecuta PIN con los argumentos recibidos en main. Si la ejecución devuelve un valor diferente de 0 se ha producido un error y se informa por standar error de su utilización correcta
+
+si se ha pasado el nombre de un archivo de salida, redirige estandar error al archivo de salida
+
+Se registra la función que analizara las instrucciones.
+
+Se registra la función Fini que se llama al finalizar el programa
+
+se inicia la ejecución del programa a instrumentar
+
+No retorna\Hypertarget{_jumps_stats_with_predictor_8cpp_a9c89b15666dec97b4af91ba247b6a230}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}!Usage@{Usage}}
+\index{Usage@{Usage}!JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+\doxysubsubsection{\texorpdfstring{Usage()}{Usage()}}
+{\footnotesize\ttfamily \label{_jumps_stats_with_predictor_8cpp_a9c89b15666dec97b4af91ba247b6a230} 
+INT32 Usage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Función de ayuda en caso de error de uso. 
+
+Muestra la forma correcta de ejecutar la herramienta cuando se detecta un error en los argumentos.
+
+\begin{DoxyReturn}{Returns}
+-\/1 Siempre, indicando error. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{_jumps_stats_with_predictor_8cpp_a580fd50bba9bf91b42a76f8948a83b9a}\index{JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}!out@{out}}
+\index{out@{out}!JumpsStatsWithPredictor.cpp@{JumpsStatsWithPredictor.cpp}}
+\doxysubsubsection{\texorpdfstring{out}{out}}
+{\footnotesize\ttfamily \label{_jumps_stats_with_predictor_8cpp_a580fd50bba9bf91b42a76f8948a83b9a} 
+ostream\texorpdfstring{$\ast$}{*} out = \&cerr}
+
+
+
+Flujo de salida para imprimir los resultados. 
+
+Por defecto, se escribe a {\ttfamily stderr}, a menos que se especifique un archivo con la opción {\ttfamily -\/o}. 

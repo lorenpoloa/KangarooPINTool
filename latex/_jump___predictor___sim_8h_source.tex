@@ -1,0 +1,40 @@
+\doxysection{Jump\+\_\+\+Predictor\+\_\+\+Sim.\+h}
+\hypertarget{_jump___predictor___sim_8h_source}{}\label{_jump___predictor___sim_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ JUMP\_PREDICTOR\_SIM\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ JUMP\_PREDICTOR\_SIM\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}pin.H"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{enum}\ PredictorType\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ ALWAYS\_TAKEN,}
+\DoxyCodeLine{00020\ \ \ \ \ ALWAYS\_NOT\_TAKEN,}
+\DoxyCodeLine{00021\ \ \ \ \ ONE\_BIT,}
+\DoxyCodeLine{00022\ \ \ \ \ TWO\_BIT,}
+\DoxyCodeLine{00023\ \ \ \ \ NUM\_PREDICTORS}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{struct\ }PredictorStats\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ UINT64\ correct;}
+\DoxyCodeLine{00035\ \ \ \ \ UINT64\ total;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ PredictorStats()\ :\ correct(0),\ total(0)\ \{\}}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_branch_predictor}{BranchPredictor}}\ \{}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_branch_predictor_a6f78bee2eb7891a4c209eb4e467f7eef}{Update}}(ADDRINT\ addr,\ BOOL\ actualTaken);}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_predictor_stats}{PredictorStats}}*\ \mbox{\hyperlink{class_branch_predictor_af2927dfea5c3a5413a11307bd81cb03b}{GetStats}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00068\ \ \ \ \ std::map<ADDRINT,\ bool>\ oneBitTable;}
+\DoxyCodeLine{00069\ \ \ \ \ std::map<ADDRINT,\ UINT8>\ twoBitTable;}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{struct_predictor_stats}{PredictorStats}}\ stats[NUM\_PREDICTORS];}
+\DoxyCodeLine{00071\ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#endif\ }}
+\DoxyCodeLine{00074\ }
+
+\end{DoxyCode}

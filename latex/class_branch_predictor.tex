@@ -1,0 +1,81 @@
+\doxysection{Branch\+Predictor Class Reference}
+\hypertarget{class_branch_predictor}{}\label{class_branch_predictor}\index{BranchPredictor@{BranchPredictor}}
+
+
+Clase que simula distintos tipos de predictores de salto.  
+
+
+
+
+{\ttfamily \#include $<$Jump\+\_\+\+Predictor\+\_\+\+Sim.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_branch_predictor_a6f78bee2eb7891a4c209eb4e467f7eef}{Update}} (ADDRINT addr, BOOL actual\+Taken)
+\begin{DoxyCompactList}\small\item\em Actualiza las estadísticas de predicción a partir de un nuevo salto. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{struct_predictor_stats}{Predictor\+Stats}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_branch_predictor_af2927dfea5c3a5413a11307bd81cb03b}{Get\+Stats}} () const
+\begin{DoxyCompactList}\small\item\em Obtiene las estadísticas actuales de los predictores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Clase que simula distintos tipos de predictores de salto. 
+
+Esta clase mantiene las tablas de predicción para los algoritmos de 1-\/bit y 2-\/bit, y actualiza estadísticas de precisión para cada tipo de predictor. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_branch_predictor_af2927dfea5c3a5413a11307bd81cb03b}\index{BranchPredictor@{BranchPredictor}!GetStats@{GetStats}}
+\index{GetStats@{GetStats}!BranchPredictor@{BranchPredictor}}
+\doxysubsubsection{\texorpdfstring{GetStats()}{GetStats()}}
+{\footnotesize\ttfamily \label{class_branch_predictor_af2927dfea5c3a5413a11307bd81cb03b} 
+const \mbox{\hyperlink{struct_predictor_stats}{Predictor\+Stats}} \texorpdfstring{$\ast$}{*} Branch\+Predictor\+::\+Get\+Stats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Obtiene las estadísticas actuales de los predictores. 
+
+\begin{DoxyReturn}{Returns}
+Puntero para un arreglo que almacena las estadísticas ({\ttfamily \doxylink{struct_predictor_stats}{Predictor\+Stats}}) para cada tipo de predictor. 
+\end{DoxyReturn}
+\Hypertarget{class_branch_predictor_a6f78bee2eb7891a4c209eb4e467f7eef}\index{BranchPredictor@{BranchPredictor}!Update@{Update}}
+\index{Update@{Update}!BranchPredictor@{BranchPredictor}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_branch_predictor_a6f78bee2eb7891a4c209eb4e467f7eef} 
+void Branch\+Predictor\+::\+Update (\begin{DoxyParamCaption}\item[{ADDRINT}]{addr}{, }\item[{BOOL}]{actual\+Taken}{}\end{DoxyParamCaption})}
+
+
+
+Actualiza las estadísticas de predicción a partir de un nuevo salto. 
+
+Actualiza las estadísticas de todos los predictores de salto.
+
+Esta función evalúa y actualiza los cuatro tipos de predictores implementados según la dirección de la instrucción de salto y el resultado real del salto.
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & Dirección de la instrucción de salto. \\
+\hline
+{\em actual\+Taken} & Valor real del salto ({\ttfamily true} si fue tomado).\\
+\hline
+\end{DoxyParams}
+Esta función simula cuatro tipos de predictores\+:
+\begin{DoxyItemize}
+\item Always Taken\+: siempre predice que el salto será tomado.
+\item Always Not Taken\+: siempre predice que el salto NO será tomado.
+\item Predictor de 1 bit\+: mantiene una predicción por dirección, que cambia directamente según el último resultado.
+\item Predictor de 2 bits\+: utiliza una máquina de estados de 2 bits.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em addr} & Dirección de la instrucción de salto (utilizada como índice en las tablas de predicción). \\
+\hline
+{\em actual\+Taken} & Booleano para estado del salto ({\ttfamily true} si fue tomado, {\ttfamily false} si no). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Jump\+\_\+\+Predictor\+\_\+\+Sim.\+h\item 
+Jump\+\_\+\+Predictor\+\_\+\+Sim.\+cpp\end{DoxyCompactItemize}

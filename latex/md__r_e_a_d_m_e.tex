@@ -1,0 +1,164 @@
+\chapter{README}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{README@{README}}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md0}{}\doxysection{\texorpdfstring{Kangaroo\+PINTool}{Kangaroo\+PINTool}}\label{md__r_e_a_d_m_e_autotoc_md0}
+Some PIN Tool for Computer Architecture Labs.
+
+This is a tool developed using the \href{https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html}{\texttt{ Intel® Pin}} framework. \hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysubsection{\texorpdfstring{Requirements}{Requirements}}\label{md__r_e_a_d_m_e_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Intel PIN (not included, download from the official website)
+\item Compatible compiler (gcc/g++, clang, etc.)
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysubsection{\texorpdfstring{What is Kangaroo PIN Tools}{What is Kangaroo PIN Tools}}\label{md__r_e_a_d_m_e_autotoc_md2}
+Is a set of PIN Tools to get stats about jumps instructions in a program.\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{Jumps\+Stats\+Simple}{Jumps\+Stats\+Simple}}\label{md__r_e_a_d_m_e_autotoc_md3}
+Simple stats about the number of conditional jumps instructions and the ratio of taken jumps.\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsubsection{\texorpdfstring{Jumps\+Stats\+By\+Type}{Jumps\+Stats\+By\+Type}}\label{md__r_e_a_d_m_e_autotoc_md4}
+More detailed stats about each type of jumps instructions and the ratio of them that are taken.\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsubsection{\texorpdfstring{Jumps\+Stats\+With\+Predictor}{Jumps\+Stats\+With\+Predictor}}\label{md__r_e_a_d_m_e_autotoc_md5}
+Stats about differents jumps predictors simulations\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{\texorpdfstring{How to use}{How to use}}\label{md__r_e_a_d_m_e_autotoc_md6}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{Compiling and Using ~\newline
+}{Compiling and Using ~\newline
+}}\label{md__r_e_a_d_m_e_autotoc_md7}
+Copy all files from this repository to \mbox{[}your pin path\mbox{]}/source/tools/\+Jumps\+Tools
+
+Copy makefile from any tools directori (ex. /tools/\+My\+Pin\+Tool/makefile) to /tools/\+Jumps\+Tools/makefile
+
+Compile\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsubsection{\texorpdfstring{Exec with PIN\+:}{Exec with PIN\+:}}\label{md__r_e_a_d_m_e_autotoc_md8}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pin\ -\/t\ JumpsStatsSimple.so\ -\/-\/\ ./your\_program}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{\texorpdfstring{Jumps\+Stats\+By\+Type}{Jumps\+Stats\+By\+Type}}\label{md__r_e_a_d_m_e_autotoc_md9}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{📘 Manual and Description}{📘 Manual and Description}}\label{md__r_e_a_d_m_e_autotoc_md10}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsubsection{\texorpdfstring{📝 General Description}{📝 General Description}}\label{md__r_e_a_d_m_e_autotoc_md11}
+Jumps\+Stats\+By\+Type is an instrumentation tool developed with Intel® Pin Tool. Its goal is to collect detailed statistics of branch instructions executed by a program, classified by jump type (e.\+g., je, jne, jmp, call, etc.).
+
+The tool analyzes whether each branch was taken or not taken and provides a summary both by instruction type and overall.\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysubsubsection{\texorpdfstring{🔍 What does it measure?}{🔍 What does it measure?}}\label{md__r_e_a_d_m_e_autotoc_md12}
+For each type of branch instruction (such as je, jmp, jne, etc.), the tool reports\+:
+
+Number of times the branch was taken.
+
+Number of times the branch was not taken.
+
+Total number of times that branch instruction was executed.
+
+Percentage of times the branch was taken.
+
+Additionally, it provides a total summary of all branches encountered during program execution.\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{▶️ Usage}{▶️ Usage}}\label{md__r_e_a_d_m_e_autotoc_md13}
+To use the tool, run your target program with Pin and this tool as follows\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pin\ -\/t\ obj-\/intel64/JumpsStatsByType.so\ -\/o\ results.txt\ -\/-\/\ ./my\_program}
+\DoxyCodeLine{Parameters}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/t\ obj-\/intel64/JumpsStatsByType.so:\ path\ to\ the\ compiled\ tool\ file.}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/o\ results.txt:\ (optional)\ name\ of\ the\ output\ file.\ If\ omitted,\ the\ output\ will\ be\ shown\ in\ the\ console.}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/-\/\ ./my\_program:\ the\ program\ you\ want\ to\ instrument\ and\ analyze.}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsubsection{\texorpdfstring{📄 Example Output}{📄 Example Output}}\label{md__r_e_a_d_m_e_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=======\ Branch\ Statistics\ =======}
+\DoxyCodeLine{Type\ \ \ \ \ \ Taken\ \ \ \ \ Not-\/Taken\ \ \ \ \ \ Total\ \ \ \ \ Percent\ Taken}
+\DoxyCodeLine{JL\ \ \ \ \ \ \ \ 16618\ \ \ \ \ 11137\ \ \ \ \ \ \ \ \ \ 27755\ \ \ \ \ 59.87}
+\DoxyCodeLine{JLE\ \ \ \ \ \ \ 777522\ \ \ \ 86634\ \ \ \ \ \ \ \ \ \ 864156\ \ \ \ 89.97}
+\DoxyCodeLine{JMP\ \ \ \ \ \ \ 6697168\ \ \ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ 6697168\ \ \ 100.00}
+\DoxyCodeLine{JNB\ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ 0\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ 100.00}
+\DoxyCodeLine{JNBE\ \ \ \ \ \ 0\ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ \ \ \ \ \ 1\ \ \ \ \ \ \ \ \ 0.00}
+\DoxyCodeLine{JNL\ \ \ \ \ \ \ 1495623\ \ \ 96834\ \ \ \ \ \ \ \ \ \ 1592457\ \ \ 93.92}
+\DoxyCodeLine{JNLE\ \ \ \ \ \ 2997847\ \ \ 2700035\ \ \ \ \ \ \ \ 5697882\ \ \ 52.61}
+\DoxyCodeLine{JNZ\ \ \ \ \ \ \ 29622463\ \ 599877\ \ \ \ \ \ \ \ \ 30222340\ \ 98.02}
+\DoxyCodeLine{JP\ \ \ \ \ \ \ \ 0\ \ \ \ \ \ \ \ \ 2\ \ \ \ \ \ \ \ \ \ \ \ \ \ 2\ \ \ \ \ \ \ \ \ 0.00}
+\DoxyCodeLine{JZ\ \ \ \ \ \ \ \ 138542\ \ \ \ 6895682\ \ \ \ \ \ \ \ 7034224\ \ \ 1.97}
+\DoxyCodeLine{=======================================}
+\DoxyCodeLine{Total\ Taken\ \ \ \ \ =\ 40964646}
+\DoxyCodeLine{Total\ Not\ Taken\ =\ 10252691}
+\DoxyCodeLine{Total\ Branches\ \ =\ 51217337}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysubsubsection{\texorpdfstring{⚠️ Considerations}{⚠️ Considerations}}\label{md__r_e_a_d_m_e_autotoc_md15}
+The tool only counts branch-\/type instructions and classifies them by their mnemonic (e.\+g., jne, jmp).
+
+It does not distinguish between direct and indirect branches, but you can extend it to do so.\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysubsection{\texorpdfstring{Jumps\+Stats\+With\+Predictor}{Jumps\+Stats\+With\+Predictor}}\label{md__r_e_a_d_m_e_autotoc_md16}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysubsection{\texorpdfstring{📘 Manual and Description}{📘 Manual and Description}}\label{md__r_e_a_d_m_e_autotoc_md17}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysubsubsection{\texorpdfstring{📝 General Description}{📝 General Description}}\label{md__r_e_a_d_m_e_autotoc_md18}
+Jumps\+Stats\+With\+Predictor is a PIN Tool that instruments conditional branch instructions in a running binary. Its goal is to evaluate the accuracy of several commonly used branch prediction algorithms\+:
+
+Always Taken
+
+Always Not Taken
+
+1-\/bit Predictor
+
+2-\/bit Predictor
+
+The tool collects runtime statistics during the program execution and generates a summary report at the end.\hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysubsubsection{\texorpdfstring{⚙️ Components and Operation}{⚙️ Components and Operation}}\label{md__r_e_a_d_m_e_autotoc_md19}
+Branch Prediction Logic File\+: Jump\+\_\+\+Predictor\+\_\+\+Sim.\+cpp
+
+Implemented Predictors\+: Always Taken\+: Always predicts that the branch will be taken.
+
+Always Not Taken\+: Always predicts the branch will not be taken.
+
+1-\/bit Predictor\+: Stores the last branch result (true/false) for each instruction address and uses it for the next prediction.
+
+2-\/bit Predictor\+: Uses a 2-\/bit saturating counter (values 0-\/3) per address\+:
+
+0–1 → predict not taken
+
+2–3 → predict taken
+
+The counter is incremented/decremented based on the current result.\hypertarget{md__r_e_a_d_m_e_autotoc_md20}{}\doxysubsubsection{\texorpdfstring{▶️ Usage}{▶️ Usage}}\label{md__r_e_a_d_m_e_autotoc_md20}
+Execution 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{pin\ -\/t\ obj-\/intel64/JumpsStatsWithPredictor.so\ -\/o\ results.txt\ -\/-\/\ ./your\_program}
+
+\end{DoxyCode}
+
+
+-\/t\+: specifies the tool
+
+-\/o\+: output file for the results
+
+--\+: separates PIN arguments from the program to run\hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysubsubsection{\texorpdfstring{📄 Sample Output}{📄 Sample Output}}\label{md__r_e_a_d_m_e_autotoc_md21}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=====\ Branch\ Predictor\ Results\ =====}
+\DoxyCodeLine{Always\ Taken}
+\DoxyCodeLine{\ \ \ \ Correct:\ 140}
+\DoxyCodeLine{\ \ \ \ Total:\ 300}
+\DoxyCodeLine{\ \ \ \ Accuracy:\ 46.67\%}
+\DoxyCodeLine{Always\ Not\ Taken}
+\DoxyCodeLine{\ \ \ \ Correct:\ 160}
+\DoxyCodeLine{\ \ \ \ Total:\ 300}
+\DoxyCodeLine{\ \ \ \ Accuracy:\ 53.33\%}
+\DoxyCodeLine{1-\/bit}
+\DoxyCodeLine{\ \ \ \ Correct:\ 200}
+\DoxyCodeLine{\ \ \ \ Total:\ 300}
+\DoxyCodeLine{\ \ \ \ Accuracy:\ 66.67\%}
+\DoxyCodeLine{2-\/bit}
+\DoxyCodeLine{\ \ \ \ Correct:\ 250}
+\DoxyCodeLine{\ \ \ \ Total:\ 300}
+\DoxyCodeLine{\ \ \ \ Accuracy:\ 83.33\%}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysubsubsection{\texorpdfstring{🧾 File Structure}{🧾 File Structure}}\label{md__r_e_a_d_m_e_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{.}
+\DoxyCodeLine{├──\ JumpsStatsWithPredictor.cpp\ \ \ ←\ Main\ PIN\ tool}
+\DoxyCodeLine{├──\ Jump\_Predictor\_Sim.cpp\ \ \ \ \ \ \ \ ←\ Predictor\ implementations}
+\DoxyCodeLine{└──\ Jump\_Predictor\_Sim.h\ \ \ \ \ \ \ \ \ \ ←\ Predictor\ data\ structures\ and\ API}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md23}{}\doxysubsubsection{\texorpdfstring{⚠️ Considerations}{⚠️ Considerations}}\label{md__r_e_a_d_m_e_autotoc_md23}
+The tool only counts predictions statistics from the simulated jump predictor, not about real jump predictor from the CPU that execute the program.
+
+It does not distinguish between direct and indirect branches, but you can extend it to do so.\hypertarget{md__r_e_a_d_m_e_autotoc_md24}{}\doxysubsection{\texorpdfstring{License}{License}}\label{md__r_e_a_d_m_e_autotoc_md24}
+This project is licensed under the CC0 License. {\bfseries{Note}}\+: Intel PIN has its own proprietary license. Please refer to Intel\textquotesingle{}s terms before using PIN. 
