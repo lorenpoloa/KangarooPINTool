@@ -14,7 +14,11 @@
 #include <string>
 #include <iomanip>
 
-// Estructura de estadísticas por tipo de salto
+/**
+ * @brief Estructura de estadísticas por tipo de salto
+ * 
+ */
+
 struct JumpStats {
 	UINT64 taken;
 	UINT64 notTaken;
@@ -22,7 +26,11 @@ struct JumpStats {
 	JumpStats() : taken(0), notTaken(0) {}
 };
 
-// Mapa de estadísticas por mnemonic
+/**
+ * @brief Mapa de estadísticas por mnemonic
+ * 
+ */
+
 std::map<std::string, JumpStats> stats;
 UINT64 totalTaken = 0;
 UINT64 totalNotTaken = 0;
@@ -35,8 +43,15 @@ KNOB<std::string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool",
 	"o", "", "Output file name");
 
 
-// Función llamada antes de cada instrucción de salto. Cada mnemonico se guarda en una fila del mapa y
-// para cada uno se cuenta si el salto es tomado o no.
+/**
+ * @brief Función llamada antes de cada instrucción de salto. Cada mnemonico se guarda en una fila del mapa y
+ *  para cada uno se cuenta si el salto es tomado o no.
+ * 
+ * @param mnemonic mnemonico del tipo de salto (jne, jmp, jz, etc. )
+ * @param taken bool para indicar si el salto fue tomado o no
+ * @return VOID 
+ */
+
 VOID CountBranch(std::string* mnemonic, BOOL taken)
 {
 	if (taken) {
@@ -49,7 +64,12 @@ VOID CountBranch(std::string* mnemonic, BOOL taken)
 	}
 }
 
-// Instrumentar las instrucciones de salto dentro de una rutina
+/**
+ * @brief 
+ * 
+ * @param rtn 
+ * @return VOID 
+ */
 VOID InstrumentRoutine(RTN rtn)
 {
 	RTN_Open(rtn);
@@ -71,7 +91,14 @@ VOID InstrumentRoutine(RTN rtn)
 	RTN_Close(rtn);
 }
 
-// Se llama cuando se carga una imagen, si la imagen pertenece al programa principal se ejecuta la instrumentación, en caso contrario no.
+/**
+ * @brief Se llama cuando se carga una imagen, si la imagen pertenece al programa
+ *  principal se ejecuta la instrumentación, en caso contrario no.
+ * 
+ * @param img 
+ * @param v 
+ * @return VOID 
+ */
 VOID ImageLoad(IMG img, VOID* v)
 {
 	if (!IMG_IsMainExecutable(img)) return;
@@ -84,7 +111,13 @@ VOID ImageLoad(IMG img, VOID* v)
 	}
 }
 
-// Impresión de las estadísticas
+/**
+ * @brief Impresión de las estadísticas
+ * 
+ * @param code 
+ * @param v 
+ * @return * VOID 
+ */
 VOID Fini(INT32 code, VOID* v)
 {
 	std::ostream& out = outFile.is_open() ? outFile : std::cerr; // si no se ha abierto el archivo de resultados estos se pasan por standard error
@@ -121,14 +154,24 @@ VOID Fini(INT32 code, VOID* v)
 	out << "Total Branches  = " << (totalTaken + totalNotTaken) << endl;
 }
 
-// Funcion llamada cuando falla la pin tool.
+/**
+ * @brief Funcion llamada cuando falla la pin tool.
+ * 
+ * @return INT32 
+ */
 INT32 Usage()
 {
 	std::cerr << "Usage: pin -t JumpsStatsByType.so [-o output.txt] -- <program>\n"; // Mensaje help si hay fallo en la ejecución 
 	return -1;
 }
 
-// Inicio de programa.
+/**
+ * @brief Inicio de programa.
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
 int main(int argc, char* argv[])
 {
 	if (PIN_Init(argc, argv)) return Usage(); // Si falla la ejecucion de la pin tool
