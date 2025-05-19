@@ -1,5 +1,5 @@
 # Objetos necesarios
-TOOL_ROOT := JumpsStatsWithPredictor
+TOOL_ROOT := JumpsStatsWithPredictor JumpsStatsSimple JumpsStatsByTypes
 TOOL_SOURCES = JumpsStatsWithPredictor.cpp Jump_Predictor_Sim.cpp
 TOOL_OBJECTS = $(TOOL_SOURCES:.cpp=$(OBJ_SUFFIX))
 
